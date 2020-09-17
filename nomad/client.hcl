@@ -1,5 +1,11 @@
 data_dir  = "/var/lib/nomad"
-bind_addr = "{{ GetInterfaceIP \"eth1\" }}"
+bind_addr = "127.0.0.1"
+
+advertise {
+  http = "{{ GetInterfaceIP \"eth1\" }}"
+  rpc  = "{{ GetInterfaceIP \"eth1\" }}"
+  surf = "{{ GetInterfaceIP \"eth1\" }}"
+}
 
 client {
   enabled           = true
