@@ -34,8 +34,7 @@ curl https://sh.rustup.rs -sSf | sh -s -- -y
 
 echo "Installing node"
 curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
-sudo apt install -y nodejs
-npm i -g yarn
+sudo apt install -y nodejs && npm i -g yarn
 
 # Clone repos
 git clone https://github.com/bken-io/keel/
