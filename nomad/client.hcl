@@ -4,7 +4,7 @@ bind_addr = "127.0.0.1"
 advertise {
   http = "{{ GetInterfaceIP \"eth1\" }}"
   rpc  = "{{ GetInterfaceIP \"eth1\" }}"
-  surf = "{{ GetInterfaceIP \"eth1\" }}"
+  serf = "{{ GetInterfaceIP \"eth1\" }}"
 }
 
 client {
