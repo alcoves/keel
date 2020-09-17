@@ -2,7 +2,7 @@
 # Setting up a base image should be done line by line
 
 echo "Setting environment variables"
-NOMAD_VERSION="0.12.3"
+NOMAD_VERSION="0.12.4"
 CONSUL_VERSION="1.8.3"
 
 echo "Installing dependencies"
