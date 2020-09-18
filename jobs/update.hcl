@@ -10,7 +10,7 @@ job "update" {
       config {
         command = "/usr/bin/bash"
         args    = [
-          "/root/keel/scripts/update",
+          "/root/keel/scripts/update.sh",
         ]
       }
     }
