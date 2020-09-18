@@ -1,5 +1,4 @@
 #!/bin/bash
-set -eux
 
 cd /root/tidal
 git reset --hard origin/master
@@ -11,4 +10,7 @@ git pull
 
 cd ~
 
-sudo apt update && sudo apt upgrade -y
+sudo apt update ||
+sudo apt upgrade -y ||
+
+exit 0
