@@ -10,7 +10,7 @@ git pull
 
 cd ~
 
-sudo apt update ||
-sudo apt upgrade -y ||
+sudo apt update || true
+sudo apt upgrade -y || true
 
 exit 0
