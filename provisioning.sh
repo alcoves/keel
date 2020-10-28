@@ -1,13 +1,10 @@
 #!/bin/bash
 
-echo "Setting environment variables"
-NOMAD_VERSION="0.12.4"
-CONSUL_VERSION="1.8.3"
-
 echo "Installing dependencies"
 sudo apt update && sudo apt -y install gnupg ffmpeg htop nfs-common unzip zip curl wget git build-essential nasm awscli jq docker.io
 
 echo "Installing Nomad"
+NOMAD_VERSION="1.0.0-beta2"
 NOMAD_URL="https://releases.hashicorp.com/nomad/${NOMAD_VERSION}/nomad_${NOMAD_VERSION}_linux_amd64.zip"
 
 curl $NOMAD_URL -o "nomad.zip"
@@ -16,6 +13,7 @@ sudo mv nomad /usr/local/bin/
 rm -rf nomad.zip
 
 echo "Installing Consul"
+CONSUL_VERSION="1.8.5"
 CONSUL_URL="https://releases.hashicorp.com/consul/${CONSUL_VERSION}/consul_${CONSUL_VERSION}_linux_amd64.zip"
 
 curl $CONSUL_URL -o "consul.zip"
