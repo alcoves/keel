@@ -1,5 +1,7 @@
-data_dir  = "/var/lib/nomad"
-bind_addr = "{{ GetInterfaceIP \"eth1\" }}"
+region     = "us"
+datacenter = "dc1"
+data_dir   = "/var/lib/nomad"
+bind_addr  = "{{ GetInterfaceIP \"eth1\" }}"
 
 addresses {
   http = "0.0.0.0"

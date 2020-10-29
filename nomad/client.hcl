@@ -1,5 +1,7 @@
-data_dir  = "/var/lib/nomad"
-bind_addr = "0.0.0.0"
+region     = "us"
+datacenter = "dc1"
+bind_addr  = "0.0.0.0"
+data_dir   = "/var/lib/nomad"
 
 addresses {
   http = "127.0.0.1"
