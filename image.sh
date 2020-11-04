@@ -2,6 +2,8 @@
 
 echo "Installing dependencies"
 sudo apt update && sudo apt -y install gnupg ffmpeg htop nfs-common unzip zip curl wget git build-essential nasm awscli jq docker.io
+sudo apt upgrade -y
+sudo apt autoremove -y
 
 echo "Installing Nomad"
 NOMAD_VERSION="1.0.0-beta2"
@@ -40,14 +42,6 @@ cd tidal && yarn && cd ..
 mkdir -p /var/lib/consul
 mkdir -p /var/lib/nomad
 
-# Configure Consul Client
-sudo cp /root/keel/consul/client.service /etc/systemd/system/consul-client.service
-sudo systemctl enable consul-client.service
-sudo systemctl start consul-client.service
-
-echo "waiting for consul to start and join"
-sleep 20;
-
 echo "setting up digitalocean profile"
 aws configure set aws_access_key_id "$(consul kv get secrets/DO_ACCESS_KEY_ID)" --profile digitalocean
 aws configure set aws_secret_access_key "$(consul kv get secrets/DO_SECRET_ACCESS_KEY)" --profile digitalocean
@@ -55,20 +49,3 @@ aws configure set aws_secret_access_key "$(consul kv get secrets/DO_SECRET_ACCES
 echo "setting up wasabi profile"
 aws configure set aws_access_key_id "$(consul kv get secrets/WASABI_ACCESS_KEY_ID)" --profile wasabi
 aws configure set aws_secret_access_key "$(consul kv get secrets/WASABI_SECRET_ACCESS_KEY)" --profile wasabi
-
-# Configure Nomad Client
-sudo cp /root/keel/nomad/client.service /etc/systemd/system/nomad-client.service
-sudo systemctl enable nomad-client.service
-sudo systemctl start nomad-client.service
-
-# Server configuration
-
-# Configure Consul Server
-# sudo cp /root/keel/consul/server.service /etc/systemd/system/consul-server.service
-# sudo systemctl enable consul-server.service
-# sudo systemctl start consul-server.service
-
-# Configure Nomad Server
-# sudo cp /root/keel/nomad/server.service /etc/systemd/system/nomad-server.service
-# sudo systemctl enable nomad-server.service
-# sudo systemctl start nomad-server.service
