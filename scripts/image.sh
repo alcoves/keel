@@ -37,15 +37,3 @@ git clone https://github.com/bken-io/tidal/
 
 # Install tidal deps
 cd tidal && yarn && cd ..
-
-# Setup dirs
-mkdir -p /var/lib/consul
-mkdir -p /var/lib/nomad
-
-echo "setting up digitalocean profile"
-aws configure set aws_access_key_id "$(consul kv get secrets/DO_ACCESS_KEY_ID)" --profile digitalocean
-aws configure set aws_secret_access_key "$(consul kv get secrets/DO_SECRET_ACCESS_KEY)" --profile digitalocean
-
-echo "setting up wasabi profile"
-aws configure set aws_access_key_id "$(consul kv get secrets/WASABI_ACCESS_KEY_ID)" --profile wasabi
-aws configure set aws_secret_access_key "$(consul kv get secrets/WASABI_SECRET_ACCESS_KEY)" --profile wasabi
