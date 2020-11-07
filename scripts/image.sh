@@ -1,7 +1,8 @@
 #!/bin/bash
 
 echo "Installing dependencies"
-sudo apt update && sudo apt -y install gnupg ffmpeg htop nfs-common unzip zip curl wget git build-essential nasm awscli jq docker.io
+sudo apt update 
+sudo apt -y install gnupg ffmpeg htop nfs-common unzip zip curl wget git build-essential nasm awscli jq docker.io
 sudo apt upgrade -y
 sudo apt autoremove -y
 
