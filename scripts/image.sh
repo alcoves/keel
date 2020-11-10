@@ -6,6 +6,12 @@ sudo apt -y install gnupg ffmpeg htop nfs-common unzip zip curl wget git build-e
 sudo apt upgrade -y
 sudo apt autoremove -y
 
+echo "Installing bento4"
+wget http://zebulon.bok.net/Bento4/binaries/Bento4-SDK-1-6-0-637.x86_64-unknown-linux.zip
+unzip Bento4-SDK-1-6-0-637.x86_64-unknown-linux.zip && rm Bento4-SDK-1-6-0-637.x86_64-unknown-linux.zip
+mv Bento4-SDK-1-6-0-637.x86_64-unknown-linux bento
+mv bento /usr/local/bin/bento
+
 echo "Installing Nomad"
 NOMAD_VERSION="1.0.0-beta2"
 NOMAD_URL="https://releases.hashicorp.com/nomad/${NOMAD_VERSION}/nomad_${NOMAD_VERSION}_linux_amd64.zip"
