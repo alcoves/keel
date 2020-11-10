@@ -15,7 +15,7 @@ for (( i=0; i<$NUMBER_OF_INSTANCES; ++i)); do
   doctl compute droplet create \
   $DROPLET_NAME \
   --region nyc3 \
-  --image 72892706 \
+  --image 73220041 \
   --enable-monitoring \
   --size $INSTANCE_SIZE \
   --enable-private-networking \
