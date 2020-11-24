@@ -6,6 +6,9 @@ sudo apt -y install gnupg ffmpeg htop nfs-common unzip zip curl wget git build-e
 sudo apt upgrade -y
 sudo apt autoremove -y
 
+echo "Install snap deps"
+snap install go --classic
+
 echo "Installing bento4"
 wget http://zebulon.bok.net/Bento4/binaries/Bento4-SDK-1-6-0-637.x86_64-unknown-linux.zip
 unzip Bento4-SDK-1-6-0-637.x86_64-unknown-linux.zip && rm Bento4-SDK-1-6-0-637.x86_64-unknown-linux.zip

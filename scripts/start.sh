@@ -1,7 +1,11 @@
 #!/bin/bash
 
+# TODO :: remove when next tidal image is created
+echo "installing go"
+snap install go --classic
+
 echo "resyncing repos"
-cd /root/tidal && git pull
+cd /root/tidal && git pull && go build src/main.go
 cd /root/keel && git pull
 
 echo "creating consul/nomad dirs"
