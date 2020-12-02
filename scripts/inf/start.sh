@@ -5,7 +5,12 @@ echo "installing go"
 snap install go --classic
 
 echo "resyncing repos"
-cd /root/tidal && git pull && go build src/main.go
+cd /root/tidal && git pull
+
+echo "recompiling tidal"
+export HOME="/root" # Needed for golang to not crash
+go build src/main.go
+
 cd /root/keel && git pull
 
 echo "creating consul/nomad dirs"
