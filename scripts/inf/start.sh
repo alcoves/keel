@@ -18,9 +18,9 @@ mkdir -p /var/lib/consul
 mkdir -p /var/lib/nomad
 
 echo "configuring consul client"
-sudo cp /root/keel/consul/client.service /etc/systemd/system/consul-client.service
-sudo systemctl enable consul-client.service
-sudo systemctl start consul-client.service
+sudo cp /root/keel/consul/client.service /etc/systemd/system/consul.service
+sudo systemctl enable consul.service
+sudo systemctl start consul.service
 
 echo "waiting for consul to start and join"
 sleep 20;
@@ -34,16 +34,16 @@ aws configure set aws_access_key_id "$(consul kv get secrets/WASABI_ACCESS_KEY_I
 aws configure set aws_secret_access_key "$(consul kv get secrets/WASABI_SECRET_ACCESS_KEY)" --profile wasabi
 
 echo "cofiguring nomad client"
-sudo cp /root/keel/nomad/client.service /etc/systemd/system/nomad-client.service
-sudo systemctl enable nomad-client.service
-sudo systemctl start nomad-client.service
+sudo cp /root/keel/nomad/client.service /etc/systemd/system/nomad.service
+sudo systemctl enable nomad.service
+sudo systemctl start nomad.service
 
 # Configure Consul Server
-# sudo cp /root/keel/consul/server.service /etc/systemd/system/consul-server.service
-# sudo systemctl enable consul-server.service
-# sudo systemctl start consul-server.service
+# sudo cp /root/keel/consul/server.service /etc/systemd/system/consul.service
+# sudo systemctl enable consul.service
+# sudo systemctl start consul.service
 
 # Configure Nomad Server
-# sudo cp /root/keel/nomad/server.service /etc/systemd/system/nomad-server.service
-# sudo systemctl enable nomad-server.service
-# sudo systemctl start nomad-server.service
+# sudo cp /root/keel/nomad/server.service /etc/systemd/system/nomad.service
+# sudo systemctl enable nomad.service
+# sudo systemctl start nomad.service
