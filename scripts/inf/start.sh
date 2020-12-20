@@ -9,7 +9,7 @@ cd /root/tidal && git pull
 
 echo "recompiling tidal"
 export HOME="/root" # Needed for golang to not crash
-go build src/main.go
+go build main.go
 
 cd /root/keel && git pull
 
