@@ -1,5 +1,8 @@
 #!/bin/bash
 
+echo "updating apt"
+sudo apt update
+
 # TODO :: remove when next tidal image is created
 echo "installing go"
 snap install go --classic
