@@ -13,6 +13,14 @@ advertise {
   serf = "{{ GetInterfaceIP \"eth1\" }}"
 }
 
+telemetry {
+  disable_hostname = true
+  prometheus_metrics = true
+  collection_interval = "1s"
+  publish_node_metrics = true
+  publish_allocation_metrics = true
+}
+
 consul {
   auto_advertise      = true
   server_auto_join    = true
