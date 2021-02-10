@@ -1,10 +1,10 @@
 region     = "us"
 datacenter = "dc1"
-bind_addr  = "0.0.0.0"
+bind_addr  = "{{ GetInterfaceIP \"eth1\" }}"
 data_dir   = "/var/lib/nomad"
 
 addresses {
-  http = "127.0.0.1"
+  http = "0.0.0.0"
 }
 
 advertise {
