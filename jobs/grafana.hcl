@@ -1,6 +1,6 @@
 # Borrowed from
 # https://github.com/burdandrei/nomad-monitoring
- 
+
 job "grafana" {
   datacenters = ["dc1"]
   type = "service"
@@ -8,6 +8,12 @@ job "grafana" {
   constraint {
     attribute = "${attr.kernel.name}"
     value = "linux"
+  }
+
+  constraint {
+    value     = "app-"
+    operator  = "regexp"
+    attribute = "${attr.unique.hostname}"
   }
 
   update {
@@ -38,13 +44,8 @@ job "grafana" {
       }
 
       artifact {
-        source      = "https://github.com/bkenio/keel/grafana/provisioning/dashboards"
+        source      = "github.com/bkenio/keel/grafana/provisioning/dashboards"
         destination = "local/dashboards/"
-      }
-
-      artifact {
-        source      = "github.com/burdandrei/nomad-monitoring/examples/grafana/provisioning"
-        destination = "local/provisioning/"
       }
 
       resources {

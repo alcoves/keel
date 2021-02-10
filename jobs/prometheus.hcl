@@ -2,6 +2,12 @@ job "prometheus" {
   datacenters = ["dc1"]
   type        = "service"
 
+  constraint {
+    value     = "app-"
+    operator  = "regexp"
+    attribute = "${attr.unique.hostname}"
+  }
+
   group "monitoring" {
     count = 1
 
@@ -67,7 +73,7 @@ EOH
 
       resources {
         cpu = 50
-        memory = 50
+        memory = 200
         network {
           mbits = 10
           port  "prometheus_ui"{}
