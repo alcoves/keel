@@ -16,7 +16,7 @@ mv Bento4-SDK-1-6-0-637.x86_64-unknown-linux bento
 mv bento /usr/local/bin/bento
 
 echo "Installing Nomad"
-NOMAD_VERSION="1.0.1"
+NOMAD_VERSION="1.0.3"
 NOMAD_URL="https://releases.hashicorp.com/nomad/${NOMAD_VERSION}/nomad_${NOMAD_VERSION}_linux_amd64.zip"
 
 curl $NOMAD_URL -o "nomad.zip"
@@ -25,22 +25,13 @@ sudo mv nomad /usr/local/bin/
 rm -rf nomad.zip
 
 echo "Installing Consul"
-CONSUL_VERSION="1.9.0"
+CONSUL_VERSION="1.9.3"
 CONSUL_URL="https://releases.hashicorp.com/consul/${CONSUL_VERSION}/consul_${CONSUL_VERSION}_linux_amd64.zip"
 
 curl $CONSUL_URL -o "consul.zip"
 unzip consul.zip
 sudo mv consul /usr/local/bin/
 rm -rf consul.zip
-
-echo "Installing Rust"
-curl https://sh.rustup.rs -sSf | sh -s -- -y
-
-echo "Installing node"
-curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
-sudo apt install -y nodejs
-sudo apt install npm -y 
-sudo npm i -g yarn
 
 # Clone repos
 cd /root

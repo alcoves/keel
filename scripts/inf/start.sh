@@ -15,13 +15,12 @@ cp -r -v Bento4-SDK-1-6-0-637.x86_64-unknown-linux/* /usr/local/
 rm -rf Bento4-SDK-1-6-0-637.x86_64-unknown-linux
 
 echo "resyncing repos"
+cd /root/keel && git pull
 cd /root/tidal && git pull
 
 echo "recompiling tidal"
 export HOME="/root" # Needed for golang to not crash
 go build main.go
-
-cd /root/keel && git pull
 
 echo "creating consul/nomad dirs"
 mkdir -p /var/lib/consul
