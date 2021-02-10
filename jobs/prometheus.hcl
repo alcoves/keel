@@ -19,7 +19,7 @@ job "prometheus" {
     }
 
     ephemeral_disk {
-      size = 300
+      size = 1000
     }
 
     task "prometheus" {
@@ -39,11 +39,7 @@ scrape_configs:
 
     consul_sd_configs:
     - server: '{{ env "NOMAD_IP_prometheus_ui" }}:8500'
-      services: ['nomad-client', 'nomad',]
-
-    digitalocean_sd_configs:
-      - bearer_token: '{{ key "secrets/DO_API_KEY" }}'
-        port: 9100
+      services: ['nomad-client', 'nomad']
 
     relabel_configs:
     - source_labels: ['__meta_consul_tags']
@@ -72,8 +68,8 @@ EOH
       }
 
       resources {
-        cpu = 50
-        memory = 200
+        cpu = 200
+        memory = 600
         network {
           mbits = 10
           port  "prometheus_ui"{}
