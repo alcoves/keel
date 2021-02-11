@@ -8,6 +8,6 @@ bind_addr        = "{{ GetInterfaceIP \"eth1\" }}"
 
 acl {
   enabled = true
-  default_policy = "deny"
+  default_policy = "allow"
   enable_token_persistence = true
 }
