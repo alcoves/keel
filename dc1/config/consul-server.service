@@ -1,5 +1,5 @@
 [Unit]
-Description=Consul server
+Description=consul
 Wants=network-online.target
 After=network-online.target
 [Service]

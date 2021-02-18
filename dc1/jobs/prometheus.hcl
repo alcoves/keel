@@ -22,6 +22,11 @@ job "prometheus" {
       size = 1000
     }
 
+    network {
+      mbits = 10
+      port  "prometheus_ui"{}
+    }
+
     task "prometheus" {
       template {
         change_mode = "noop"
@@ -70,10 +75,6 @@ EOH
       resources {
         cpu = 200
         memory = 600
-        network {
-          mbits = 10
-          port  "prometheus_ui"{}
-        }
       }
 
       service {

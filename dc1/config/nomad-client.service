@@ -1,5 +1,5 @@
 [Unit]
-Description=Nomad client
+Description=nomad
 Wants=network-online.target
 After=network-online.target
 [Service]

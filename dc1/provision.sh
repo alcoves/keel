@@ -47,3 +47,12 @@ echo "Cloning bken.io repos"
 cd ~
 git clone https://github.com/bken-io/keel/
 git clone https://github.com/bken-io/tidal/
+
+echo "Setting hostname"
+random-string()
+{
+  cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w ${1:-32} | head -n 1
+}
+
+HOSTNAME="bken-$(random-string 4)"
+hostnamectl set-hostname $HOSTNAME
