@@ -23,8 +23,9 @@ job "prometheus" {
     }
 
     network {
-      mbits = 10
-      port  "prometheus_ui"{}
+      port "prometheus_ui" {
+        to = 9090
+      }
     }
 
     task "prometheus" {
@@ -67,9 +68,7 @@ EOH
           "local/prometheus.yml:/etc/prometheus/prometheus.yml",
         ]
 
-        port_map {
-          prometheus_ui = 9090
-        }
+        ports = ["prometheus_ui"]
       }
 
       resources {

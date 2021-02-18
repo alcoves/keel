@@ -53,6 +53,7 @@ echo "Cloning bken.io repos"
 cd ~
 git clone https://github.com/bken-io/keel/
 git clone https://github.com/bken-io/tidal/
+cd ~/tidal && go build main.go && cd ~
 
 echo "Setting hostname"
 random-string()
@@ -61,4 +62,4 @@ random-string()
 }
 
 HOSTNAME="bken-$(random-string 4)"
-hostnamectl set-hostname $HOSTNAME
+sudo hostnamectl set-hostname $HOSTNAME
