@@ -1,0 +1,10 @@
+[Unit]
+Description=Consul client
+Wants=network-online.target
+After=network-online.target
+[Service]
+ExecStart= /bin/sh -c "/usr/local/bin/consul agent -config-file /home/ubuntu/keel/dc1/config/consul-client.hcl"
+Restart=always
+RestartSec=10
+[Install]
+WantedBy=multi-user.target
