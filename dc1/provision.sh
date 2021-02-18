@@ -13,6 +13,12 @@ CONSUL_VERSION="1.9.3"
 CONSUL_ARCHIVE_NAME="consul.zip"
 HASHI_RELEASE="https://releases.hashicorp.com"
 
+if [ "$ARCH" = "aarch64" ]; then
+  ARCH="arm64"
+else 
+  ARCH="amd64"
+fi
+
 echo "Installing dependencies"
 sudo apt update
 
@@ -27,12 +33,12 @@ sudo snap install go --classic
 sudo snap install cmake --classic
 
 echo "Installing Nomad"
-wget $HASHI_RELEASE/nomad/$NOMAD_VERSION/nomad_${NOMAD_VERSION}_linux_arm64.zip -O $NOMAD_ARCHIVE_NAME
+wget $HASHI_RELEASE/nomad/$NOMAD_VERSION/nomad_${NOMAD_VERSION}_linux_${ARCH}.zip -O $NOMAD_ARCHIVE_NAME
 unzip $NOMAD_ARCHIVE_NAME && rm -f $NOMAD_ARCHIVE_NAME
 sudo mv ./nomad /usr/local/bin/
 
 echo "Installing consul"
-wget $HASHI_RELEASE/consul/$CONSUL_VERSION/consul_${CONSUL_VERSION}_linux_arm64.zip -O $CONSUL_ARCHIVE_NAME
+wget $HASHI_RELEASE/consul/$CONSUL_VERSION/consul_${CONSUL_VERSION}_linux_${ARCH}.zip -O $CONSUL_ARCHIVE_NAME
 unzip $CONSUL_ARCHIVE_NAME && rm -f $CONSUL_ARCHIVE_NAME
 sudo mv ./consul /usr/local/bin/
 
