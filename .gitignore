@@ -1,2 +1,3 @@
-ffmpeg
-ffmpeg.zip
+.env
+*.tfvars
+.terraform
