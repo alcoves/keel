@@ -64,6 +64,10 @@ resource "digitalocean_droplet" "db" {
   vpc_uuid           = digitalocean_vpc.nyc3.id
   tags               = ["vpc", "ssh", "postgres"]
   ssh_keys           = [digitalocean_ssh_key.rusty.id]
+
+  lifecycle = {
+    prevent_destroy = true
+  }
 }
 
 resource "digitalocean_droplet" "leaders" {
