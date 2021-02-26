@@ -1,9 +1,9 @@
 [Unit]
-Description=Consul server
+Description=Nomad server
 Wants=network-online.target
 After=network-online.target
 [Service]
-ExecStart= /bin/sh -c "/usr/local/bin/consul agent -config-file /root/keel/consul/server.hcl"
+ExecStart= /bin/sh -c "/usr/local/bin/nomad agent -config ${config_path}"
 Restart=always
 RestartSec=10
 [Install]

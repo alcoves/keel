@@ -3,17 +3,6 @@
 echo "updating apt"
 sudo apt update
 
-# TODO :: remove on next tidal image
-echo "installing go"
-snap install go --classic
-
-# TODO :: remove on next tidal image
-wget http://zebulon.bok.net/Bento4/binaries/Bento4-SDK-1-6-0-637.x86_64-unknown-linux.zip
-unzip Bento4-SDK-1-6-0-637.x86_64-unknown-linux.zip
-rm Bento4-SDK-1-6-0-637.x86_64-unknown-linux.zip
-sudo cp -r -v Bento4-SDK-1-6-0-637.x86_64-unknown-linux/* /usr/local/
-rm -rf Bento4-SDK-1-6-0-637.x86_64-unknown-linux
-
 echo "resyncing repos"
 cd /root/keel && git pull
 cd /root/tidal && git pull

@@ -1,9 +1,9 @@
 [Unit]
-Description=Consul client
+Description=Consul server
 Wants=network-online.target
 After=network-online.target
 [Service]
-ExecStart= /bin/sh -c "/usr/local/bin/consul agent -config-file /root/keel/consul/client.hcl"
+ExecStart= /bin/sh -c "/usr/local/bin/consul agent -config-file ${config_path}"
 Restart=always
 RestartSec=10
 [Install]
