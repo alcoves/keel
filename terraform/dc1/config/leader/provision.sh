@@ -9,7 +9,6 @@ sudo apt autoremove -y
 
 echo "Installing Nomad"
 NOMAD_URL="https://releases.hashicorp.com/nomad/${NOMAD_VERSION}/nomad_${NOMAD_VERSION}_linux_amd64.zip"
-
 curl $NOMAD_URL -o "nomad.zip"
 unzip nomad.zip
 sudo mv nomad /usr/local/bin/
@@ -17,7 +16,6 @@ rm -rf nomad.zip
 
 echo "Installing Consul"
 CONSUL_URL="https://releases.hashicorp.com/consul/${CONSUL_VERSION}/consul_${CONSUL_VERSION}_linux_amd64.zip"
-
 curl $CONSUL_URL -o "consul.zip"
 unzip consul.zip
 sudo mv consul /usr/local/bin/
