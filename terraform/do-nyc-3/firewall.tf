@@ -134,6 +134,18 @@ resource "digitalocean_firewall" "leader" {
 
   inbound_rule {
     protocol         = "tcp"
+    port_range       = "4647"
+    source_addresses = ["0.0.0.0/0", "::/0"]
+  }
+
+  inbound_rule {
+    protocol         = "tcp"
+    port_range       = "4648"
+    source_addresses = ["0.0.0.0/0", "::/0"]
+  }
+
+  inbound_rule {
+    protocol         = "tcp"
     port_range       = "8500"
     source_addresses = ["0.0.0.0/0", "::/0"]
   }

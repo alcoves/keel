@@ -1,14 +1,14 @@
-region     = "us"
 datacenter = "dc1"
+region     = "bk-det-1"
 data_dir   = "/var/lib/nomad"
-bind_addr  = "{{ GetInterfaceIP \"eth1\" }}"
+bind_addr  = "{{ GetInterfaceIP \"eth0\" }}"
 
 addresses {
   http = "0.0.0.0"
 }
 
 advertise {
-  http = "{{ GetInterfaceIP \"eth1\" }}"
+  http = "{{ GetInterfaceIP \"eth0\" }}"
 }
 
 telemetry {

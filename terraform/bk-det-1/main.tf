@@ -3,7 +3,7 @@ terraform {
 
   backend "s3" {
     skip_credentials_validation = true
-    key                         = "dc2"
+    key                         = "bk-det-1"
     region                      = "us-east-2"
     bucket                      = "bken-tfstate"
     endpoint                    = "s3.us-east-2.wasabisys.com"

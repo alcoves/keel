@@ -1,16 +1,16 @@
-region     = "us"
 datacenter = "dc1"
-bind_addr  = "{{ GetInterfaceIP \"eth1\" }}"
+region     = "bk-det-1"
 data_dir   = "/var/lib/nomad"
+bind_addr  = "{{ GetInterfaceIP \"eth0\" }}"
 
 addresses {
   http = "0.0.0.0"
 }
 
 advertise {
-  http = "{{ GetInterfaceIP \"eth1\" }}"
-  rpc  = "{{ GetInterfaceIP \"eth1\" }}"
-  serf = "{{ GetInterfaceIP \"eth1\" }}"
+  http = "{{ GetInterfaceIP \"eth0\" }}"
+  rpc  = "{{ GetInterfaceIP \"eth0\" }}"
+  serf = "{{ GetInterfaceIP \"eth0\" }}"
 }
 
 telemetry {
@@ -32,7 +32,7 @@ consul {
 
 client {
   enabled           = true
-  network_interface = "eth1"
+  network_interface = "eth0"
 }
 
 plugin "raw_exec" {
