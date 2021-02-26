@@ -1,5 +1,5 @@
 datacenter = "dc1"
-region     = "do-nyc-3"
+region     = "do-nyc3"
 data_dir   = "/var/lib/nomad"
 bind_addr  = "{{ GetInterfaceIP \"eth1\" }}"
 

@@ -1,5 +1,5 @@
 job "prometheus" {
-  datacenters = ["do-nyc-3"]
+  datacenters = ["do-nyc3"]
   type        = "service"
 
   constraint {
