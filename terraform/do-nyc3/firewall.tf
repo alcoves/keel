@@ -133,7 +133,19 @@ resource "digitalocean_firewall" "leader" {
   }
 
   inbound_rule {
+    protocol         = "udp"
+    port_range       = "4646"
+    source_addresses = ["0.0.0.0/0", "::/0"]
+  }
+
+  inbound_rule {
     protocol         = "tcp"
+    port_range       = "4647"
+    source_addresses = ["0.0.0.0/0", "::/0"]
+  }
+
+  inbound_rule {
+    protocol         = "udp"
     port_range       = "4647"
     source_addresses = ["0.0.0.0/0", "::/0"]
   }
@@ -145,7 +157,19 @@ resource "digitalocean_firewall" "leader" {
   }
 
   inbound_rule {
+    protocol         = "udp"
+    port_range       = "4648"
+    source_addresses = ["0.0.0.0/0", "::/0"]
+  }
+
+  inbound_rule {
     protocol         = "tcp"
+    port_range       = "8500"
+    source_addresses = ["0.0.0.0/0", "::/0"]
+  }
+
+  inbound_rule {
+    protocol         = "udp"
     port_range       = "8500"
     source_addresses = ["0.0.0.0/0", "::/0"]
   }
@@ -168,9 +192,9 @@ resource "digitalocean_firewall" "leader" {
   }
 }
 
-resource "digitalocean_firewall" "fabio" {
-  name = "fabio"
-  tags = ["fabio"]
+resource "digitalocean_firewall" "app-worker" {
+  name = "app-worker"
+  tags = ["app-worker"]
 
   inbound_rule {
     protocol         = "tcp"
@@ -178,48 +202,33 @@ resource "digitalocean_firewall" "fabio" {
     source_addresses = ["0.0.0.0/0", "::/0"]
   }
 
-  outbound_rule {
-    protocol              = "tcp"
-    port_range            = "all"
-    destination_addresses = ["0.0.0.0/0", "::/0"]
-  }
-
-  outbound_rule {
-    protocol              = "udp"
-    port_range            = "all"
-    destination_addresses = ["0.0.0.0/0", "::/0"]
-  }
-
-  outbound_rule {
-    protocol              = "icmp"
-    destination_addresses = ["0.0.0.0/0", "::/0"]
-  }
-}
-
-resource "digitalocean_firewall" "fabio-ui" {
-  name = "fabio-ui"
-  tags = ["fabio-ui"]
-
   inbound_rule {
     protocol         = "tcp"
-    port_range       = "9998"
+    port_range       = "80"
     source_addresses = ["0.0.0.0/0", "::/0"]
   }
 
+  # Fabio UI
+  # inbound_rule {
+  #   protocol         = "tcp"
+  #   port_range       = "9998"
+  #   source_addresses = ["0.0.0.0/0", "::/0"]
+  # }
+
   outbound_rule {
     protocol              = "tcp"
     port_range            = "all"
-    destination_addresses = ["0.0.0.0/0", "::/0"]
+    destination_addresses = [local.nyc3_ip_range]
   }
 
   outbound_rule {
     protocol              = "udp"
     port_range            = "all"
-    destination_addresses = ["0.0.0.0/0", "::/0"]
+    destination_addresses = [local.nyc3_ip_range]
   }
 
   outbound_rule {
     protocol              = "icmp"
-    destination_addresses = ["0.0.0.0/0", "::/0"]
+    destination_addresses = [local.nyc3_ip_range]
   }
 }

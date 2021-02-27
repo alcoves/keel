@@ -28,7 +28,7 @@ data "template_file" "nomad-server" {
 data "template_file" "consul-client" {
   template = file("${path.module}/config/worker/consul.hcl")
   vars = {
-    leader_node_private_ip = "10.132.0.2"
+    leader_node_private_ip = digitalocean_droplet.leaders[0].ipv4_address_private
   }
 }
 
@@ -65,7 +65,7 @@ resource "digitalocean_droplet" "db" {
   tags               = ["vpc", "ssh", "postgres"]
   ssh_keys           = [digitalocean_ssh_key.rusty.id]
 
-  lifecycle = {
+  lifecycle {
     prevent_destroy = true
   }
 }
@@ -79,7 +79,7 @@ resource "digitalocean_droplet" "leaders" {
   image              = "ubuntu-20-04-x64"
   size               = "s-1vcpu-1gb-intel"
   vpc_uuid           = digitalocean_vpc.nyc3.id
-  tags               = ["vpc", "ssh", "leader"]
+  tags               = ["vpc", "ssh", "leader", "all"]
   name               = "leader-${count.index + 1}"
 
   ssh_keys = [
@@ -123,12 +123,14 @@ resource "digitalocean_droplet" "leaders" {
   provisioner "remote-exec" {
     inline = [
       "chmod +x /root/provision.sh",
+      "sed -i .bak 's/1.2.3.4/${self.ipv4_address}/g' ${local.nomad_config_path}",
+      "mv .bak ${local.nomad_config_path}",
       "/root/provision.sh",
     ]
   }
 }
 
-resource "digitalocean_droplet" "workers" {
+resource "digitalocean_droplet" "app-workers" {
   count              = 1
   backups            = true
   monitoring         = true
@@ -136,8 +138,8 @@ resource "digitalocean_droplet" "workers" {
   region             = "nyc3"
   image              = "ubuntu-20-04-x64"
   size               = "s-1vcpu-1gb-intel"
-  tags               = ["vpc", "ssh", "worker"]
-  name               = "worker-${count.index + 1}"
+  tags               = ["vpc", "ssh", "app-worker"]
+  name               = "app-worker-${count.index + 1}"
 
   ssh_keys = [
     digitalocean_ssh_key.bken.id,

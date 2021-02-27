@@ -1,10 +1,10 @@
 job "prometheus" {
-  datacenters = ["do-nyc3"]
+  datacenters = ["dc1"]
   type        = "service"
 
   constraint {
-    value     = "app-"
     operator  = "regexp"
+    value     = "app-worker-"
     attribute = "${attr.unique.hostname}"
   }
 
@@ -73,7 +73,7 @@ EOH
 
       resources {
         cpu = 200
-        memory = 600
+        memory = 300
       }
 
       service {

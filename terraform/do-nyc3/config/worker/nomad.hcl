@@ -7,12 +7,6 @@ addresses {
   http = "0.0.0.0"
 }
 
-advertise {
-  http = "{{ GetInterfaceIP \"eth1\" }}"
-  rpc  = "{{ GetInterfaceIP \"eth1\" }}"
-  serf = "{{ GetInterfaceIP \"eth1\" }}"
-}
-
 telemetry {
   disable_hostname = true
   prometheus_metrics = true
