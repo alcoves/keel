@@ -28,6 +28,7 @@ data "template_file" "nomad-server" {
 data "template_file" "consul-client" {
   template = file("${path.module}/config/worker/consul.hcl")
   vars = {
+    consul_acl_token       = var.CONSUL_TOKEN
     leader_node_private_ip = digitalocean_droplet.leaders[0].ipv4_address_private
   }
 }

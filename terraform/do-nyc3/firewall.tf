@@ -197,6 +197,7 @@ resource "digitalocean_firewall" "app-worker" {
   name = "app-worker"
   tags = ["app-worker"]
 
+  # Fabio UI
   # inbound_rule {
   #   protocol         = "tcp"
   #   port_range       = "9998"

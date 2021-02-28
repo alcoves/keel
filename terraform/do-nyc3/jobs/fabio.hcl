@@ -19,7 +19,12 @@ job "fabio" {
       config {
         network_mode = "host"
         image        = "fabiolb/fabio"
-        args         = [ "-proxy.addr", ":80;proto=http" ]
+        args         = [
+          "-registry.consul.token",
+          "token",
+          "-proxy.addr",
+          ":80;proto=http"
+        ]
       }
 
       resources {
