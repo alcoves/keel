@@ -34,6 +34,9 @@ data "template_file" "consul-client" {
 
 data "template_file" "nomad-client" {
   template = file("${path.module}/config/worker/nomad.hcl")
+  vars = {
+    consul_acl_token = var.CONSUL_TOKEN
+  }
 }
 
 

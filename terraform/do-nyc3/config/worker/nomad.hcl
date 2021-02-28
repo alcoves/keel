@@ -21,7 +21,9 @@ consul {
   client_auto_join    = true
   server_service_name = "nomad"
   client_service_name = "nomad-client"
+  auth                = "admin:password"
   address             = "127.0.0.1:8500"
+  token               = "${consul_acl_token}"
 }
 
 client {

@@ -10,8 +10,8 @@ job "fabio" {
 
   group "fabio" {
     network {
-      port "ui" { static = 9998 }
       port "lb" { static = 80 }
+      port "ui" { static = 9998 }
     }
 
     task "fabio" {
@@ -19,6 +19,7 @@ job "fabio" {
       config {
         network_mode = "host"
         image        = "fabiolb/fabio"
+        args         = [ "-proxy.addr", ":80;proto=http" ]
       }
 
       resources {
