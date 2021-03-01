@@ -32,6 +32,9 @@ echo "Install snap deps"
 sudo snap install go --classic
 sudo snap install cmake --classic
 
+echo "Install rclone"
+curl https://rclone.org/install.sh | sudo bash
+
 echo "Installing Nomad"
 wget $HASHI_RELEASE/nomad/$NOMAD_VERSION/nomad_${NOMAD_VERSION}_linux_${ARCH}.zip -O $NOMAD_ARCHIVE_NAME
 unzip $NOMAD_ARCHIVE_NAME && rm -f $NOMAD_ARCHIVE_NAME
@@ -42,12 +45,20 @@ wget $HASHI_RELEASE/consul/$CONSUL_VERSION/consul_${CONSUL_VERSION}_linux_${ARCH
 unzip $CONSUL_ARCHIVE_NAME && rm -f $CONSUL_ARCHIVE_NAME
 sudo mv ./consul /usr/local/bin/
 
-echo "Compiling bento4"
-git clone https://github.com/axiomatic-systems/Bento4.git
-mkdir -p Bento4/bin && cd Bento4/bin
-cmake -DCMAKE_BUILD_TYPE=Release ..
-make
-sudo cp ~/Bento4/bin/* /usr/local/bin/ || true
+# echo "Compiling bento4"
+# git clone https://github.com/axiomatic-systems/Bento4.git
+# mkdir -p Bento4/bin && cd Bento4/bin
+# cmake -DCMAKE_BUILD_TYPE=Release ..
+# make -j8
+# rm -rf ~/Bento4/bin/CMakeFiles
+# sudo cp ~/Bento4/bin/* /usr/local/bin/
+
+echo "Installing bento4"
+# TODO :: manually build instead of depending on these binaries
+wget http://zebulon.bok.net/Bento4/binaries/Bento4-SDK-1-6-0-637.x86_64-unknown-linux.zip
+unzip Bento4-SDK-1-6-0-637.x86_64-unknown-linux.zip && rm Bento4-SDK-1-6-0-637.x86_64-unknown-linux.zip
+mv Bento4-SDK-1-6-0-637.x86_64-unknown-linux bento
+sudo cp bento/bin/* /usr/local/bin/
 
 echo "Cloning bken.io repos"
 cd ~
@@ -55,11 +66,19 @@ git clone https://github.com/bken-io/keel/
 git clone https://github.com/bken-io/tidal/
 cd ~/tidal && go build main.go && cd ~
 
+echo "Mounting NFS"
+MOUNT_PATH="/mnt/tidal"
+sudo mkdir $MOUNT_PATH -p
+sudo chown nobody:nogroup $MOUNT_PATH
+FSTAB_MOUNT="10.0.0.17:/mnt/user/tidal $MOUNT_PATH nfs rw,hard,intr,rsize=8192,wsize=8192,timeo=14 0 0"
+echo $FSTAB_MOUNT | sudo tee -a /etc/fstab
+sudo mount $MOUNT_PATH
+
 echo "Setting hostname"
 random-string()
 {
   cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w ${1:-32} | head -n 1
 }
 
-HOSTNAME="bken-$(random-string 4)"
+HOSTNAME="tidal-$(random-string 4)"
 sudo hostnamectl set-hostname $HOSTNAME
