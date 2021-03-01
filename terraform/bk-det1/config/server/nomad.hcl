@@ -1,17 +1,10 @@
 datacenter = "dc1"
 region     = "bk-det-1"
 data_dir   = "/var/lib/nomad"
+bind_addr  = "{{ GetInterfaceIP \"eth0\" }}"
 
 addresses {
   http = "0.0.0.0"
-  rpc  = "0.0.0.0"
-  serf = "0.0.0.0"
-}
-
-advertise {
-  http = "{{ GetInterfaceIP \"eth0\" }}"
-  rpc  = "{{ GetInterfaceIP \"eth0\" }}"
-  serf = "{{ GetInterfaceIP \"eth0\" }}"
 }
 
 telemetry {

@@ -7,7 +7,7 @@ data_dir         = "/var/lib/consul"
 bind_addr        = "{{ GetInterfaceIP \"eth0\" }}"
 
 acl {
-  enabled = true
-  default_policy = "allow"
+  enabled                  = true
   enable_token_persistence = true
+  default_policy           = "allow"
 }

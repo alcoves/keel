@@ -79,7 +79,7 @@ EOH
       service {
         name = "prometheus"
         port = "prometheus_ui"
-        tags = ["urlprefix-/prometheus/ strip=/prometheus"]
+        tags = ["urlprefix-/prometheus strip=/prometheus"]
 
         check {
           name     = "prometheus_ui port alive"

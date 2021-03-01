@@ -3,7 +3,7 @@ Description=consul
 Wants=network-online.target
 After=network-online.target
 [Service]
-ExecStart= /bin/sh -c "/usr/local/bin/consul agent -config-file /home/ubuntu/keel/terraform/bk-det-1/config/consul-server.hcl"
+ExecStart= /bin/sh -c "/usr/local/bin/consul agent -config-file /home/ubuntu/consul.hcl"
 Restart=always
 RestartSec=10
 [Install]

@@ -3,7 +3,7 @@ Description=nomad
 Wants=network-online.target
 After=network-online.target
 [Service]
-ExecStart= /bin/sh -c "/usr/local/bin/nomad agent -config /home/ubuntu/keel/terraform/bk-det-1/config/nomad-client.hcl"
+ExecStart= /bin/sh -c "/usr/local/bin/nomad agent -config /home/ubuntu/nomad.hcl"
 Restart=always
 RestartSec=10
 [Install]
