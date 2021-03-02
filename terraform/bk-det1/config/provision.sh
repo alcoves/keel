@@ -49,16 +49,16 @@ sudo mv ./consul /usr/local/bin/
 # git clone https://github.com/axiomatic-systems/Bento4.git
 # mkdir -p Bento4/bin && cd Bento4/bin
 # cmake -DCMAKE_BUILD_TYPE=Release ..
-# make -j8
-# rm -rf ~/Bento4/bin/CMakeFiles
-# sudo cp ~/Bento4/bin/* /usr/local/bin/
+# make -j64
+# cd ..
+# sudo cp -r bin/ /usr/local/
 
 echo "Installing bento4"
 # TODO :: manually build instead of depending on these binaries
 wget http://zebulon.bok.net/Bento4/binaries/Bento4-SDK-1-6-0-637.x86_64-unknown-linux.zip
 unzip Bento4-SDK-1-6-0-637.x86_64-unknown-linux.zip && rm Bento4-SDK-1-6-0-637.x86_64-unknown-linux.zip
 mv Bento4-SDK-1-6-0-637.x86_64-unknown-linux bento
-sudo cp bento/bin/* /usr/local/bin/
+sudo cp -R ./bento/* /usr/local/
 
 echo "Cloning bken.io repos"
 cd ~
