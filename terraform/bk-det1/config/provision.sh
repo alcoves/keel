@@ -29,8 +29,8 @@ sudo apt upgrade -y
 sudo apt autoremove -y
 
 echo "Install snap deps"
-sudo snap install go --classic
 sudo snap install cmake --classic
+sudo snap install go --channel=1.16/stable --classic
 
 echo "Install rclone"
 curl https://rclone.org/install.sh | sudo bash
