@@ -141,7 +141,7 @@ resource "digitalocean_droplet" "app-workers" {
   private_networking = true
   region             = "nyc3"
   image              = "ubuntu-20-04-x64"
-  size               = "s-1vcpu-1gb-intel"
+  size               = "s-1vcpu-2gb-intel"
   tags               = ["vpc", "ssh", "app-worker"]
   name               = "app-worker-${count.index + 1}"
 
