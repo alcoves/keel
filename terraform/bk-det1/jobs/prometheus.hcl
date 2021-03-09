@@ -3,9 +3,9 @@ job "prometheus" {
   type        = "service"
 
   constraint {
-    attribute = "${attr.cpu.arch}"
     operator  = "="
-    value     = "amd64"
+    value     = "arm64"
+    attribute = "${attr.cpu.arch}"
   }
 
   group "monitoring" {
@@ -72,8 +72,8 @@ EOH
       }
 
       resources {
-        cpu    = 500
-        memory = 1000
+        cpu    = 2000
+        memory = 2000
       }
 
       service {
