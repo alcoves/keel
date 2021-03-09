@@ -10,7 +10,7 @@ addresses {
 telemetry {
   disable_hostname = true
   prometheus_metrics = true
-  collection_interval = "1s"
+  collection_interval = "15s"
   publish_node_metrics = true
   publish_allocation_metrics = true
 }

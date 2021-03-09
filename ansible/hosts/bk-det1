@@ -1,0 +1,17 @@
+[all:vars]
+ansible_become=yes
+ansible_user=ubuntu
+ansible_connection=ssh
+ansible_become_method=sudo
+ansible_ssh_private_key_file=~/.ssh/bken.pem
+
+[workers_amd64]
+10.0.0.55  
+
+[workers_arm64]
+10.0.0.51  
+10.0.0.52  
+10.0.0.53  
+
+[leaders]
+10.0.0.50
