@@ -1,7 +1,7 @@
 datacenter = "dc1"
+bind_addr  = "0.0.0.0"
 region     = "bk-det-1"
 data_dir   = "/var/lib/nomad"
-bind_addr  = "{{ GetInterfaceIP \"eth0\" }}"
 
 addresses {
   http = "0.0.0.0"
@@ -25,8 +25,7 @@ consul {
 }
 
 client {
-  enabled           = true
-  network_interface = "eth0"
+  enabled = true
 }
 
 plugin "raw_exec" {
