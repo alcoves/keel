@@ -37,4 +37,4 @@ sudo cp /home/ubuntu/keel/terraform/bk-det1/config/nomad.service /etc/systemd/sy
 sudo sed "s/{PRIVATE_IP}/${PRIVATE_IP}/g" /home/ubuntu/keel/terraform/bk-det1/config/${TYPE}/nomad.hcl > /etc/nomad.d/nomad.hcl
 sudo systemctl enable nomad.service
 sudo systemctl stop nomad.service
-sudo systemctl start consul.service
+sudo systemctl start nomad.service
