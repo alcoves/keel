@@ -3,7 +3,7 @@ Description=consul
 Wants=network-online.target
 After=network-online.target
 [Service]
-ExecStart= /bin/sh -c "/usr/local/bin/consul agent -config-dir /etc/consul.d/"
+ExecStart= /bin/sh -c "/usr/local/bin/consul agent -config /etc/consul.d/consul.hcl"
 Restart=always
 RestartSec=10
 [Install]
