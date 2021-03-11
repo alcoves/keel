@@ -1,20 +1,10 @@
 [Unit]
 Description=nomad
-Documentation=https://www.nomadproject.io/
-Requires=network-online.target
+Wants=network-online.target
 After=network-online.target
-ConditionFileNotEmpty=/etc/consul.d/consul.hcl
-
 [Service]
-Type=notify
-User=root
-Group=root
-ExecStart= /bin/sh -c "/usr/local/bin/nomad agent -config-dir /etc/nomad.d"
-ExecReload=/bin/kill --signal HUP $MAINPID
-KillMode=process
-KillSignal=SIGTERM
-Restart=on-failure
-LimitNOFILE=65536
-
+ExecStart= /bin/sh -c "/usr/local/bin/nomad agent -config-dir /etc/nomad.d/"
+Restart=always
+RestartSec=10
 [Install]
 WantedBy=multi-user.target
