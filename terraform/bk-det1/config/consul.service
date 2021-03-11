@@ -1,5 +1,5 @@
 [Unit]
-Description="HashiCorp Consul - A service mesh solution"
+Description=consul
 Documentation=https://www.consul.io/
 Requires=network-online.target
 After=network-online.target
@@ -9,7 +9,7 @@ ConditionFileNotEmpty=/etc/consul.d/consul.hcl
 Type=notify
 User=root
 Group=root
-ExecStart=/usr/local/bin/consul agent -config-dir=/etc/consul.d/
+ExecStart= /bin/sh -c "/usr/local/bin/consul agent -config-dir /etc/consul.d"
 ExecReload=/bin/kill --signal HUP $MAINPID
 KillMode=process
 KillSignal=SIGTERM
