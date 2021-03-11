@@ -1,4 +1,5 @@
 #!/bin/bash
+set -eux
 
 TYPE=$1
 PRIVATE_IP=$2
