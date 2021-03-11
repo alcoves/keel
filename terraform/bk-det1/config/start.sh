@@ -14,11 +14,10 @@ if [ -z "$PRIVATE_IP" ]; then
 fi
 
 echo "resyncing repos"
-cd /home/ubuntu/keel && git reset --hard && git pull -r
-cd /home/ubuntu/tidal && git reset --hard && git pull -r
+[ -d "/home/ubuntu/keel" ] && echo git reset --hard && git pull -r
 
 echo "recompiling tidal"
-cd /home/ubuntu/tidal && make install && cd ~
+[ -d "/home/ubuntu/tidal" ] && echo git reset --hard && git pull -r && make install && cd ~
 
 echo "creating consul/nomad dirs"
 sudo mkdir -p /var/lib/consul
