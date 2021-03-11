@@ -1,10 +1,20 @@
 [Unit]
-Description=nomad
-Wants=network-online.target
+Description="HashiCorp Nomad - A simple orchestrator"
+Documentation=https://www.nomadproject.io/
+Requires=network-online.target
 After=network-online.target
+ConditionFileNotEmpty=/etc/consul.d/consul.hcl
+
 [Service]
-ExecStart= /bin/sh -c "/usr/local/bin/nomad agent -config /home/ubuntu/nomad.hcl"
-Restart=always
-RestartSec=10
+Type=notify
+User=ubuntu
+Group=ubuntu
+ExecStart=/usr/local/bin/nomad agent -config-dir=/etc/nomad.d/
+ExecReload=/bin/kill --signal HUP $MAINPID
+KillMode=process
+KillSignal=SIGTERM
+Restart=on-failure
+LimitNOFILE=65536
+
 [Install]
 WantedBy=multi-user.target

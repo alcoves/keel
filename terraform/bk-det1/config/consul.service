@@ -1,10 +1,20 @@
 [Unit]
-Description=consul
-Wants=network-online.target
+Description="HashiCorp Consul - A service mesh solution"
+Documentation=https://www.consul.io/
+Requires=network-online.target
 After=network-online.target
+ConditionFileNotEmpty=/etc/consul.d/consul.hcl
+
 [Service]
-ExecStart= /bin/sh -c "/usr/local/bin/consul agent -config-file /home/ubuntu/consul.hcl"
-Restart=always
-RestartSec=10
+Type=notify
+User=ubuntu
+Group=ubuntu
+ExecStart=/usr/local/bin/consul agent -config-dir=/etc/consul.d/
+ExecReload=/bin/kill --signal HUP $MAINPID
+KillMode=process
+KillSignal=SIGTERM
+Restart=on-failure
+LimitNOFILE=65536
+
 [Install]
 WantedBy=multi-user.target
