@@ -193,9 +193,9 @@ resource "digitalocean_firewall" "leader" {
   }
 }
 
-resource "digitalocean_firewall" "app-worker" {
-  name = "app-worker"
-  tags = ["app-worker"]
+resource "digitalocean_firewall" "app" {
+  name = "app"
+  tags = ["app"]
 
   # Fabio UI
   # inbound_rule {

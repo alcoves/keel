@@ -3,6 +3,7 @@ set -eux
 
 TYPE=$1
 PRIVATE_IP=$2
+CONSUL_MASTER_TOKEN=$3
 
 if [ -z "$TYPE" ]; then
   echo "first argument must be either worker or server"
@@ -15,10 +16,10 @@ if [ -z "$PRIVATE_IP" ]; then
 fi
 
 echo "resyncing repos"
-[ -d "/home/ubuntu/keel" ] && echo git reset --hard && git pull -r
+[ -d "/home/ubuntu/keel" ] && cd /home/ubuntu/keel && echo git reset --hard && git pull -r && cd ~
 
 echo "recompiling tidal"
-[ -d "/home/ubuntu/tidal" ] && echo git reset --hard && git pull -r && make install && cd ~
+[ -d "/home/ubuntu/tidal" ] && cd /home/ubuntu/tidal && echo git reset --hard && git pull -r && make install && cd ~
 
 echo "creating consul/nomad dirs"
 sudo mkdir -p /var/lib/consul
@@ -29,6 +30,7 @@ sudo mkdir -p /etc/nomad.d
 
 sudo cp /home/ubuntu/keel/terraform/bk-det1/config/consul.service /etc/systemd/system/consul.service
 sudo sed "s/{PRIVATE_IP}/${PRIVATE_IP}/g" /home/ubuntu/keel/terraform/bk-det1/config/${TYPE}/consul.hcl > /etc/consul.d/consul.hcl
+sudo sed "s/{CONSUL_MASTER_TOKEN}/${CONSUL_MASTER_TOKEN}/g" /home/ubuntu/keel/terraform/bk-det1/config/${TYPE}/consul.hcl > /etc/consul.d/consul.hcl
 sudo systemctl enable consul.service
 sudo systemctl stop consul.service
 sudo systemctl start consul.service

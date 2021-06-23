@@ -1,11 +1,19 @@
 terraform {
-  required_version = "0.14.7"
-  backend "s3" {}
+  required_version = "1.0.0"
+  backend "s3" {
+    skip_credentials_validation = true
+    skip_region_validation      = true
+    skip_metadata_api_check     = true
+    region                      = "us-east-1"
+    bucket                      = "bken-tf-state"
+    endpoint                    = "nyc3.digitaloceanspaces.com"
+    key                         = "keel/terraform/do-nyc3/terraform.tfstate"
+  }
 
   required_providers {
     digitalocean = {
       source  = "digitalocean/digitalocean"
-      version = "2.5.1"
+      version = "~> 2.0"
     }
   }
 }

@@ -8,8 +8,8 @@ set -e
 echo "Setting some things up"
 ARCH=$(arch)
 NOMAD_ARCHIVE_NAME="nomad.zip"
-NOMAD_VERSION="1.0.3"
-CONSUL_VERSION="1.9.3"
+NOMAD_VERSION="1.1.0"
+CONSUL_VERSION="1.9.5"
 CONSUL_ARCHIVE_NAME="consul.zip"
 HASHI_RELEASE="https://releases.hashicorp.com"
 
@@ -44,21 +44,6 @@ echo "Installing consul"
 wget $HASHI_RELEASE/consul/$CONSUL_VERSION/consul_${CONSUL_VERSION}_linux_${ARCH}.zip -O $CONSUL_ARCHIVE_NAME
 unzip $CONSUL_ARCHIVE_NAME && rm -f $CONSUL_ARCHIVE_NAME
 sudo mv ./consul /usr/local/bin/
-
-# echo "Compiling bento4"
-# git clone https://github.com/axiomatic-systems/Bento4.git
-# mkdir -p Bento4/bin && cd Bento4/bin
-# cmake -DCMAKE_BUILD_TYPE=Release ..
-# make -j64
-# cd ..
-# sudo cp -r bin/ /usr/local/
-
-echo "Installing bento4"
-# TODO :: manually build instead of depending on these binaries
-wget http://zebulon.bok.net/Bento4/binaries/Bento4-SDK-1-6-0-637.x86_64-unknown-linux.zip
-unzip Bento4-SDK-1-6-0-637.x86_64-unknown-linux.zip && rm Bento4-SDK-1-6-0-637.x86_64-unknown-linux.zip
-mv Bento4-SDK-1-6-0-637.x86_64-unknown-linux bento
-sudo cp -R ./bento/* /usr/local/
 
 echo "Cloning bken.io repos"
 cd ~

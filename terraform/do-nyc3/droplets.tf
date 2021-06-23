@@ -57,23 +57,6 @@ data "template_file" "provision-worker" {
   }
 }
 
-resource "digitalocean_droplet" "db" {
-  name               = "db"
-  backups            = true
-  monitoring         = true
-  private_networking = true
-  region             = "nyc3"
-  size               = "s-1vcpu-1gb"
-  image              = "ubuntu-20-04-x64"
-  vpc_uuid           = digitalocean_vpc.nyc3.id
-  tags               = ["vpc", "ssh", "postgres"]
-  ssh_keys           = [digitalocean_ssh_key.rusty.id]
-
-  lifecycle {
-    prevent_destroy = true
-  }
-}
-
 resource "digitalocean_droplet" "leaders" {
   count              = 1
   monitoring         = true
@@ -96,7 +79,7 @@ resource "digitalocean_droplet" "leaders" {
     type        = "ssh"
     user        = "root"
     host        = self.ipv4_address
-    private_key = file("/home/brendan/.ssh/bken.pem")
+    private_key = file("~/.ssh/bken.pem")
   }
 
   provisioner "file" {
@@ -142,8 +125,8 @@ resource "digitalocean_droplet" "app-workers" {
   region             = "nyc3"
   image              = "ubuntu-20-04-x64"
   size               = "s-1vcpu-2gb-intel"
-  tags               = ["vpc", "ssh", "app-worker"]
-  name               = "app-worker-${count.index + 1}"
+  tags               = ["vpc", "ssh", "app"]
+  name               = "app-${count.index + 1}"
 
   ssh_keys = [
     digitalocean_ssh_key.bken.id,
@@ -155,7 +138,7 @@ resource "digitalocean_droplet" "app-workers" {
     type        = "ssh"
     user        = "root"
     host        = self.ipv4_address
-    private_key = file("/home/brendan/.ssh/bken.pem")
+    private_key = file("~/.ssh/bken.pem")
   }
 
   provisioner "file" {
