@@ -9,7 +9,7 @@ job "prometheus" {
   }
 
   group "monitoring" {
-    count = 1
+    count = 2
 
     restart {
       attempts = 2
@@ -45,7 +45,7 @@ scrape_configs:
 
     consul_sd_configs:
     - server: '{{ env "NOMAD_IP_prometheus_ui" }}:8500'
-      services: ['nomad-client', 'nomad']
+      services: ['nomad-client', 'nomad', "nomad-worker"]
 
     relabel_configs:
     - source_labels: ['__meta_consul_tags']

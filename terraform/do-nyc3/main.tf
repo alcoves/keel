@@ -5,8 +5,8 @@ terraform {
     skip_region_validation      = true
     skip_metadata_api_check     = true
     region                      = "us-east-1"
-    bucket                      = "bken-tf-state"
-    endpoint                    = "nyc3.digitaloceanspaces.com"
+    bucket                      = "bken-tfstate"
+    endpoint                    = "s3.us-east-2.wasabisys.com"
     key                         = "keel/terraform/do-nyc3/terraform.tfstate"
   }
 

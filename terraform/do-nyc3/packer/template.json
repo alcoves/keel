@@ -1,0 +1,25 @@
+{
+  "builders": [
+    {
+      "type": "digitalocean",
+      "region": "nyc3",
+      "size": "s-1vcpu-1gb",
+      "ssh_username": "root",
+      "image": "ubuntu-20-04-x64",
+      "api_token": "{{ user `DOCO_TOKEN` }}"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "file",
+      "source": "./config/.env",
+      "destination": "/root/.env"
+    },
+    {
+      "type": "shell",
+      "scripts": [
+        "./config/init.sh"
+      ]
+    }
+  ]
+}
