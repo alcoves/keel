@@ -1,10 +1,10 @@
 job "fabio" {
-  datacenters = ["dc1"]
+  datacenters = ["nyc3"]
   type        = "system"
 
   constraint {
     operator  = "regexp"
-    value     = "app-worker-"
+    value     = "[/app/]"
     attribute = "${attr.unique.hostname}"
   }
 

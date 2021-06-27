@@ -1,11 +1,15 @@
 job "prometheus" {
-  datacenters = ["dc1"]
+  datacenters = ["nyc3"]
   type        = "service"
 
   constraint {
     operator  = "regexp"
-    value     = "app-worker-"
+    value     = "[/app/]"
     attribute = "${attr.unique.hostname}"
+  }
+
+  constraint {
+    distinct_hosts = true
   }
 
   group "monitoring" {
