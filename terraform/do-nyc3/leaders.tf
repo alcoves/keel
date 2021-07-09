@@ -5,9 +5,9 @@ resource "digitalocean_droplet" "leaders_a" {
   backups            = false
   region             = "nyc3"
   image              = "86748542"
+  tags               = ["vpc", "ssh"]
   size               = "s-1vcpu-1gb-amd"
   vpc_uuid           = digitalocean_vpc.nyc3.id
-  tags               = ["vpc", "ssh", "leader"]
   name               = "leader-a${count.index + 1}"
 
   ssh_keys = [
@@ -59,9 +59,9 @@ resource "digitalocean_droplet" "leaders_b" {
   backups            = false
   region             = "nyc3"
   image              = "86748542"
+  tags               = ["vpc", "ssh"]
   size               = "s-1vcpu-1gb-amd"
   vpc_uuid           = digitalocean_vpc.nyc3.id
-  tags               = ["vpc", "ssh", "leader"]
   name               = "leader-b${count.index + 1}"
 
   ssh_keys = [
