@@ -30,6 +30,7 @@ sudo mkdir -p /etc/nomad.d
 
 sudo cp /home/ubuntu/keel/terraform/bk-det1/config/consul.service /etc/systemd/system/consul.service
 sudo sed "s/{PRIVATE_IP}/${PRIVATE_IP}/g" /home/ubuntu/keel/terraform/bk-det1/config/${TYPE}/consul.hcl > /etc/consul.d/consul.hcl
+sudo sed "s/{CONSUL_MASTER_TOKEN}/${CONSUL_MASTER_TOKEN}/g" /home/ubuntu/keel/terraform/bk-det1/config/${TYPE}/nomad.hcl > /etc/nomad.d/nomad.hcl
 sudo sed "s/{CONSUL_MASTER_TOKEN}/${CONSUL_MASTER_TOKEN}/g" /home/ubuntu/keel/terraform/bk-det1/config/${TYPE}/consul.hcl > /etc/consul.d/consul.hcl
 sudo systemctl enable consul.service
 sudo systemctl stop consul.service

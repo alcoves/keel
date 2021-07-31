@@ -22,6 +22,7 @@ consul {
   server_service_name = "nomad"
   client_service_name = "nomad-client"
   address             = "127.0.0.1:8500"
+  token               = "{CONSUL_MASTER_TOKEN}"
 }
 
 client {

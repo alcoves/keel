@@ -9,14 +9,10 @@ job "archive" {
   }
 
   group "archive" {
-    count = 40
+    count = 10
 
     update {
-      max_parallel     = 4
-      // auto_revert      = true
-      // auto_promote     = true
-      // healthy_deadline = "5m"
-      // min_healthy_time = "30s"
+      max_parallel = 10
     }
 
     restart {
@@ -41,7 +37,7 @@ job "archive" {
 
       env {
         CONCURRENT_ITEMS = 6
-        SELECTED_PROJECT = "youtube"
+        SELECTED_PROJECT = "auto"
         DOWNLOADER       = "rustyguts"
       }
 
@@ -51,8 +47,8 @@ job "archive" {
       }
 
       resources {
-        cpu    = 500
-        memory = 300
+        cpu    = 1000
+        memory = 600
       }
     }
   }

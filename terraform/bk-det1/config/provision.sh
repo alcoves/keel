@@ -8,8 +8,8 @@ set -e
 echo "Setting some things up"
 ARCH=$(arch)
 NOMAD_ARCHIVE_NAME="nomad.zip"
-NOMAD_VERSION="1.1.0"
-CONSUL_VERSION="1.9.5"
+NOMAD_VERSION="1.1.3"
+CONSUL_VERSION="1.10.1"
 CONSUL_ARCHIVE_NAME="consul.zip"
 HASHI_RELEASE="https://releases.hashicorp.com"
 
