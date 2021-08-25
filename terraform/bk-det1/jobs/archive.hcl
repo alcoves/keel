@@ -9,10 +9,10 @@ job "archive" {
   }
 
   group "archive" {
-    count = 10
+    count = 0
 
     update {
-      max_parallel = 10
+      max_parallel = 5
     }
 
     restart {
