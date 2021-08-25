@@ -94,14 +94,26 @@ resource "digitalocean_firewall" "all" {
   }
 }
 
-resource "digitalocean_firewall" "postgres" {
-  name = "postgres"
-  tags = ["postgres"]
+resource "digitalocean_firewall" "nomad" {
+  name = "nomad"
+  tags = ["leader"]
 
-  # Disable public access to the db
   inbound_rule {
     protocol         = "tcp"
-    port_range       = "5432"
+    port_range       = "4646"
+    source_addresses = ["0.0.0.0/0", "::/0"]
+  }
+
+  inbound_rule {
+    protocol         = "tcp"
+    port_range       = "4647"
+    source_addresses = ["0.0.0.0/0", "::/0"]
+  }
+
+
+  inbound_rule {
+    protocol         = "tcp"
+    port_range       = "4648"
     source_addresses = ["0.0.0.0/0", "::/0"]
   }
 
