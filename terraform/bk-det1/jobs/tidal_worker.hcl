@@ -8,7 +8,7 @@ job "tidal" {
 
     update {
       max_parallel     = 6
-      canary           = 3
+      canary           = 6
       auto_revert      = true
       auto_promote     = true
       healthy_deadline = "5m"
@@ -40,7 +40,7 @@ DO_API_KEY="{{key "secrets/DO_API_KEY"}}"
       config {
         force_pull = true
         ports      = ["bken_tidal_port"]
-        image      = "registry.digitalocean.com/bken/tidal:526955044a3d64ea6950edc7e9d63c4d305247ae"
+        image      = "registry.digitalocean.com/bken/tidal:364baa97c463f5e7998c0a33f1a3a231f47bfe82"
 
         auth {
           username = "${DO_API_KEY}"
