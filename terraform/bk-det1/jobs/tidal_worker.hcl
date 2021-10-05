@@ -8,9 +8,7 @@ job "tidal" {
 
     update {
       max_parallel     = 6
-      canary           = 6
       auto_revert      = true
-      auto_promote     = true
       healthy_deadline = "5m"
       min_healthy_time = "30s"
     }
