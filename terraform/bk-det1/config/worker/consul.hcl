@@ -6,10 +6,9 @@ data_dir    = "/var/lib/consul"
 
 acl {
   enabled        = true
-  default_policy = "deny"
+  default_policy = "allow"
   down_policy    = "extend-cache"
-
   tokens {
-    "master" = "$CONSUL_MASTER_TOKEN"
+    agent = "$CONSUL_MASTER_TOKEN"
   }
 }
