@@ -16,7 +16,7 @@ telemetry {
 }
 
 server {
-  bootstrap_expect = 1
+  bootstrap_expect = 4
   enabled          = true
 }
 

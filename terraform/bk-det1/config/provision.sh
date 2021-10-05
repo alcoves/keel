@@ -8,8 +8,8 @@ set -e
 echo "Setting some things up"
 ARCH=$(arch)
 NOMAD_ARCHIVE_NAME="nomad.zip"
-NOMAD_VERSION="1.1.3"
-CONSUL_VERSION="1.10.1"
+NOMAD_VERSION="1.1.5"
+CONSUL_VERSION="1.10.3"
 CONSUL_ARCHIVE_NAME="consul.zip"
 HASHI_RELEASE="https://releases.hashicorp.com"
 
@@ -28,10 +28,12 @@ curl wget git build-essential nasm awscli jq docker.io
 sudo apt upgrade -y
 sudo apt autoremove -y
 
+# Deprecated
 echo "Install snap deps"
 sudo snap install cmake --classic
-sudo snap install go --channel=1.16/stable --classic
+sudo snap install go --channel=1.17/stable --classic
 
+# Deprecated
 echo "Install rclone"
 curl https://rclone.org/install.sh | sudo bash
 
@@ -47,17 +49,10 @@ sudo mv ./consul /usr/local/bin/
 
 echo "Cloning bken.io repos"
 cd ~
-git clone https://github.com/bken-io/keel/
-git clone https://github.com/bken-io/tidal/
-cd ~/tidal && go build main.go && cd ~
-
-echo "Mounting NFS"
-MOUNT_PATH="/mnt/tidal"
-sudo mkdir $MOUNT_PATH -p
-sudo chown nobody:nogroup $MOUNT_PATH
-FSTAB_MOUNT="10.0.0.17:/mnt/user/tidal $MOUNT_PATH nfs rw,hard,intr,rsize=8192,wsize=8192,timeo=14 0 0"
-echo $FSTAB_MOUNT | sudo tee -a /etc/fstab
-sudo mount $MOUNT_PATH
+rm -rf ~/keel
+rm -rf ~/tidal
+git clone https://github.com/bkenio/keel/
+git clone https://github.com/bkenio/tidal/
 
 echo "Setting hostname"
 random-string()

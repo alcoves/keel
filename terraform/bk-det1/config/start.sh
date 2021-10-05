@@ -19,7 +19,7 @@ echo "resyncing repos"
 [ -d "/home/ubuntu/keel" ] && cd /home/ubuntu/keel && echo git reset --hard && git pull -r && cd ~
 
 echo "recompiling tidal"
-[ -d "/home/ubuntu/tidal" ] && cd /home/ubuntu/tidal && echo git reset --hard && git pull -r && make install && cd ~
+[ -d "/home/ubuntu/tidal" ] && cd /home/ubuntu/tidal && echo git reset --hard && git pull -r && cd ~
 
 echo "creating consul/nomad dirs"
 sudo mkdir -p /var/lib/consul

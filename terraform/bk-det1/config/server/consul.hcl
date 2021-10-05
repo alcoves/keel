@@ -1,4 +1,4 @@
-bootstrap_expect = 1
+bootstrap_expect = 4
 datacenter       = "dc1"
 server           = true
 ui               = true
