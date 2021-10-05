@@ -1,6 +1,6 @@
 datacenter = "dc1"
 region     = "bk-det-1"
-bind_addr  = "{PRIVATE_IP}"
+bind_addr  = "$PRIVATE_IP"
 data_dir   = "/var/lib/nomad"
 
 addresses {

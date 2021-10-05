@@ -1,6 +1,6 @@
 datacenter = "dc1"
 region     = "bk-det-1"
-bind_addr  = "{PRIVATE_IP}"
+bind_addr  = "$PRIVATE_IP"
 data_dir   = "/var/lib/nomad"
 
 addresses {
@@ -22,7 +22,7 @@ consul {
   server_service_name = "nomad"
   client_service_name = "nomad-client"
   address             = "127.0.0.1:8500"
-  token               = "{CONSUL_MASTER_TOKEN}"
+  token               = "$CONSUL_MASTER_TOKEN"
 }
 
 client {

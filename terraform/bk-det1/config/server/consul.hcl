@@ -3,7 +3,7 @@ datacenter       = "dc1"
 server           = true
 ui               = true
 client_addr      = "0.0.0.0"
-bind_addr        = "{PRIVATE_IP}"
+bind_addr        = "$PRIVATE_IP"
 data_dir         = "/var/lib/consul"
 
 acl {

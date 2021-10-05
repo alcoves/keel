@@ -1,9 +1,9 @@
 #!/bin/bash
 set -eux
 
-TYPE=$1
-PRIVATE_IP=$2
-CONSUL_MASTER_TOKEN=$3
+export TYPE=$1
+export PRIVATE_IP=$2
+export CONSUL_MASTER_TOKEN=$3
 
 if [ -z "$TYPE" ]; then
   echo "first argument must be either worker or server"
@@ -30,14 +30,16 @@ sudo mkdir -p /var/lib/nomad
 sudo rm -rf /etc/nomad.d
 sudo mkdir -p /etc/nomad.d
 
+SUB_VARS='$PRIVATE_IP:$CONSUL_MASTER_TOKEN'
+
 sudo cp /home/ubuntu/keel/terraform/bk-det1/config/consul.service /etc/systemd/system/consul.service
-sudo sed -n -e "s/{PRIVATE_IP}/${PRIVATE_IP}/g" -e "s/{CONSUL_MASTER_TOKEN}/${CONSUL_MASTER_TOKEN}/g" /home/ubuntu/keel/terraform/bk-det1/config/${TYPE}/consul.hcl > /etc/consul.d/consul.hcl
+envsubst "$SUB_VARS" < /home/ubuntu/keel/terraform/bk-det1/config/${TYPE}/consul.hcl > /etc/consul.d/consul.hcl
 sudo systemctl enable consul.service
 sudo systemctl stop consul.service
 sudo systemctl start consul.service
 
 sudo cp /home/ubuntu/keel/terraform/bk-det1/config/nomad.service /etc/systemd/system/nomad.service
-sudo sed -n -e "s/{PRIVATE_IP}/${PRIVATE_IP}/g" -e "s/{CONSUL_MASTER_TOKEN}/${CONSUL_MASTER_TOKEN}/g" /home/ubuntu/keel/terraform/bk-det1/config/${TYPE}/nomad.hcl > /etc/nomad.d/nomad.hcl
+envsubst "$SUB_VARS" < /home/ubuntu/keel/terraform/bk-det1/config/${TYPE}/nomad.hcl > /etc/nomad.d/nomad.hcl
 sudo systemctl enable nomad.service
 sudo systemctl stop nomad.service
 sudo systemctl start nomad.service
