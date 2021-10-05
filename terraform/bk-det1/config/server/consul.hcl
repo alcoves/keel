@@ -10,4 +10,8 @@ acl {
   enabled                  = true
   enable_token_persistence = true
   default_policy           = "allow"
+  down_policy              = "extend-cache"
+  tokens {
+    agent = "$CONSUL_MASTER_TOKEN"
+  }
 }

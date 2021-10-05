@@ -21,12 +21,7 @@ server {
 }
 
 acl {
-  enabled        = true
-  default_policy = "allow"
-  down_policy    = "extend-cache"
-  tokens {
-    agent = "$CONSUL_MASTER_TOKEN"
-  }
+  enabled = true
 }
 
 client { enabled = false }
