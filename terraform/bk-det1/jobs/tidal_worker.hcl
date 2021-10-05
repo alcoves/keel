@@ -40,7 +40,7 @@ DO_API_KEY="{{key "secrets/DO_API_KEY"}}"
       config {
         force_pull = true
         ports      = ["bken_tidal_port"]
-        image      = "registry.digitalocean.com/bken/tidal:364baa97c463f5e7998c0a33f1a3a231f47bfe82"
+        image      = "registry.digitalocean.com/bken/tidal:6df5b3adb385c401a6623de92e46e4329830cf88"
 
         auth {
           username = "${DO_API_KEY}"
