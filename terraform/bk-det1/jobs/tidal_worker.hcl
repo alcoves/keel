@@ -1,7 +1,13 @@
 job "tidal" {
-  priority    = 100
+  priority    = 10
   datacenters = ["dc1"]
   type        = "service"
+
+  affinity {
+    attribute = "${unique.hostname}"
+    value     = "r630-1"
+    weight    = 100
+  }
 
   group "services" {
     count = 20
@@ -47,7 +53,7 @@ DO_API_KEY="{{key "secrets/DO_API_KEY"}}"
       }
 
       resources {
-        memory = 4000
+        memory = 7000
         cpu    = 10000
       }
     }
