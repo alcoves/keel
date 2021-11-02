@@ -1,6 +1,8 @@
 #!/bin/bash
 set -eux
 
+# Example: worker 10.0.0.30 1234
+
 export TYPE=$1
 export PRIVATE_IP=$2
 export CONSUL_MASTER_TOKEN=$3
