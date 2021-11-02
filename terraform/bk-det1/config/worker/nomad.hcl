@@ -29,9 +29,11 @@ client {
   enabled = true
 }
 
-docker {
-  volumes {
-    enabled = true
+plugin "docker" {
+  config {
+    volumes {
+      enabled = true
+    }
   }
 }
 
