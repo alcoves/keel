@@ -29,6 +29,12 @@ client {
   enabled = true
 }
 
+docker {
+  volumes {
+    enabled = true
+  }
+}
+
 plugin "raw_exec" {
   config {
     enabled = true

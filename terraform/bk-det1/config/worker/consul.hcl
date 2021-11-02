@@ -12,9 +12,3 @@ acl {
     agent = "$CONSUL_MASTER_TOKEN"
   }
 }
-
-docker {
-  volumes {
-    enabled = true
-  }
-}
