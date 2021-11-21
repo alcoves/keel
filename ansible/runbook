@@ -1,3 +1,0 @@
-ansible -i hosts all -m ping
-
-ansible-playbook update.yml -i hosts --extra-vars "ansible_sudo_pass="
