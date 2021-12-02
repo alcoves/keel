@@ -37,7 +37,8 @@ ssh reef
 doctl registry login
 docker pull registry.digitalocean.com/bken/reef:latest
 docker stop reef
-docker run --name reef -p 80:3100 registry.digitalocean.com/bken/reef:latest
+docker rm reef
+docker run -d --name reef -p 80:3000 registry.digitalocean.com/bken/reef:latest
 ```
 
 ### API
@@ -48,5 +49,6 @@ Pier is deployed via Docker
 ssh pier
 docker pull registry.digitalocean.com/bken/pier:pier
 docker stop pier
-docker run --name pier -p 80:3200 registry.digitalocean.com/bken/pier:latest
+docker rm pier
+docker run -d --name pier -p 80:3200 registry.digitalocean.com/bken/pier:latest
 ```
