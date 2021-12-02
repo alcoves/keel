@@ -94,61 +94,15 @@ resource "digitalocean_firewall" "all" {
   }
 }
 
-resource "digitalocean_firewall" "nomad" {
-  name = "nomad"
-  tags = ["leader"]
-
-  inbound_rule {
-    protocol         = "tcp"
-    port_range       = "4646"
-    source_addresses = ["0.0.0.0/0", "::/0"]
-  }
-
-  inbound_rule {
-    protocol         = "tcp"
-    port_range       = "4647"
-    source_addresses = ["0.0.0.0/0", "::/0"]
-  }
-
-
-  inbound_rule {
-    protocol         = "tcp"
-    port_range       = "4648"
-    source_addresses = ["0.0.0.0/0", "::/0"]
-  }
-
-  outbound_rule {
-    protocol              = "tcp"
-    port_range            = "all"
-    destination_addresses = ["0.0.0.0/0", "::/0"]
-  }
-
-  outbound_rule {
-    protocol              = "udp"
-    port_range            = "all"
-    destination_addresses = ["0.0.0.0/0", "::/0"]
-  }
-
-  outbound_rule {
-    protocol              = "icmp"
-    destination_addresses = ["0.0.0.0/0", "::/0"]
-  }
-}
-
 resource "digitalocean_firewall" "app" {
   name = "app"
   tags = ["app"]
 
-  # Fabio UI
-  # inbound_rule {
-  #   protocol         = "tcp"
-  #   port_range       = "9998"
-  #   source_addresses = ["0.0.0.0/0", "::/0"]
-  # }
-
   inbound_rule {
     protocol   = "tcp"
     port_range = "80"
+
+    // CloudFlare
     source_addresses = [
       "173.245.48.0/20",
       "103.21.244.0/22",
