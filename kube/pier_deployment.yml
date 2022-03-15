@@ -18,7 +18,7 @@ metadata:
     app: pier
     digitalocean.com/copy-identifier: bken
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: pier
@@ -30,7 +30,7 @@ spec:
       containers:
         - name: pier
           imagePullPolicy: "Always"
-          image: registry.digitalocean.com/bken/pier:latest
+          image: registry.digitalocean.com/bken/pier:464c3f3f8dc3c7e56c63e7fedab5037489c1b036
           envFrom:
             - secretRef:
                 name: pier
