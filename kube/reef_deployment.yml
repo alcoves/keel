@@ -29,6 +29,7 @@ spec:
     spec:
       containers:
         - name: reef
+          imagePullPolicy: "Always"
           image: registry.digitalocean.com/bken/reef:latest
           envFrom:
             - secretRef:

@@ -29,7 +29,8 @@ spec:
     spec:
       containers:
         - name: tidal
-          image: registry.digitalocean.com/bken/tidal:088f8c5eebc85ac2122a0e194b1745645619d525
+          imagePullPolicy: "Always"
+          image: registry.digitalocean.com/bken/tidal:latest
           envFrom:
             - secretRef:
                 name: tidal
