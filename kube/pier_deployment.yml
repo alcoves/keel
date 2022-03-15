@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: pier
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 4000
+  selector:
+    app: pier
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pier
+  labels:
+    app: pier
+    digitalocean.com/copy-identifier: bken
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: pier
+  template:
+    metadata:
+      labels:
+        app: pier
+    spec:
+      containers:
+        - name: pier
+          image: registry.digitalocean.com/bken/pier:latest
+          envFrom:
+            - secretRef:
+                name: pier
+          ports:
+            - containerPort: 4000

@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: reef
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 3000
+  selector:
+    app: reef
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reef
+  labels:
+    app: reef
+    digitalocean.com/copy-identifier: bken
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: reef
+  template:
+    metadata:
+      labels:
+        app: reef
+    spec:
+      containers:
+        - name: reef
+          image: registry.digitalocean.com/bken/reef:latest
+          envFrom:
+            - secretRef:
+                name: reef
+          ports:
+            - containerPort: 3000
