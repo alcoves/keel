@@ -18,7 +18,7 @@ metadata:
     app: tidal
     digitalocean.com/copy-identifier: bken
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: tidal
