@@ -17,7 +17,7 @@ kubectl create secret generic pier --from-env-file=.env.prod
 kubectl delete secret tidal
 kubectl create secret generic tidal --from-env-file=.env.prod
 
-kubectl get secret tidal -o go-template='{{range $k,$v := .data}}{{"### "}}{{$k}}{{"\n"}}{{$v|base64decode}}{{"\n\n"}}{{end}}'
+kubectl get secret tidal -o json | jq '.data | map_values(@base64d)'
 
 **Using Secrets**
 
