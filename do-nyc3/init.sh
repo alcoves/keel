@@ -1,13 +1,10 @@
 # Node basics
 
+sudo apt update
 sudo apt install -y awscli zip unzip jq build-essential git wget curl nfs-common htop ca-certificates gnupg lsb-release
 
-sudo mkdir -p /etc/apt/keyrings
-curl -fsSL https://download.docker.com/linux/root/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-
-echo \
-  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/root \
-  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
 sudo apt update
 sudo apt install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
@@ -27,6 +24,9 @@ export SERVER_2_PUBLIC_IP=165.227.127.61
 
 export WORKER_1_PRIVATE_IP=10.132.0.9
 export WORKER_1_PUBLIC_IP=159.65.44.243
+
+export WORKER_2_PRIVATE_IP=10.132.0.2
+export WORKER_2_PUBLIC_IP=165.22.37.228
 
 # Servers
 
@@ -104,7 +104,32 @@ hashi-up nomad install \
   --ssh-target-key "~/.ssh/rusty" \
   --config-file ./nomad_client.hcl
 
+hashi-up consul install \
+  --connect \
+  --ssh-target-addr $WORKER_2_PUBLIC_IP \
+  --ssh-target-user root \
+  --ssh-target-key "~/.ssh/rusty" \
+  --client-addr 0.0.0.0 \
+  --bind-addr $WORKER_2_PRIVATE_IP \
+  --retry-join $SERVER_1_PRIVATE_IP --retry-join $SERVER_2_PRIVATE_IP
+
+hashi-up nomad install \
+  --ssh-target-addr $WORKER_2_PUBLIC_IP \
+  --ssh-target-user root \
+  --ssh-target-key "~/.ssh/rusty" \
+  --config-file ./nomad_client.hcl
+
 # REMOVE
+
+hashi-up nomad uninstall \
+  --ssh-target-addr $WORKER_2_PUBLIC_IP \
+  --ssh-target-user root \
+  --ssh-target-key "~/.ssh/rusty" &
+
+hashi-up consul uninstall \
+  --ssh-target-addr $WORKER_2_PUBLIC_IP \
+  --ssh-target-user root \
+  --ssh-target-key "~/.ssh/rusty" &
 
 hashi-up nomad uninstall \
   --ssh-target-addr $SERVER_1_PUBLIC_IP \

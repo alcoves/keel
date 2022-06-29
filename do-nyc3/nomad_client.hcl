@@ -1,10 +1,7 @@
 datacenter = "dc1"
 data_dir   = "/opt/nomad"
-addresses {
-  http = "0.0.0.0"
-  rpc  = "0.0.0.0"
-  serf = "0.0.0.0"
-}
+bind_addr  = "0.0.0.0"
+
 advertise {
   http = "{{ GetInterfaceIP \"eth1\" }}"
   rpc  = "{{ GetInterfaceIP \"eth1\" }}"
@@ -12,7 +9,8 @@ advertise {
 }
 
 client {
-  enabled = true
+  enabled           = true
+  network_interface = "eth1"
 }
 
 plugin "docker" {
