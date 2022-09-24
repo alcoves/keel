@@ -26,6 +26,12 @@ resource "hcloud_server" "app_workers" {
     ipv6_enabled = false
   }
 
+
+  network {
+    alias_ips  = []
+    network_id = hcloud_network.main.id
+  }
+
   connection {
     type        = "ssh"
     user        = "root"
@@ -37,40 +43,29 @@ resource "hcloud_server" "app_workers" {
     script = "../scripts/dependencies.sh"
   }
 
+  provisioner "local-exec" {
+    command = join(" ", [
+      "../scripts/provision-worker.sh",
+      "10.0.1.1", # Private IPV4: Retry join leader
+      self.ipv4_address
+    ])
+  }
+
+  provisioner "local-exec" {
+    when = destroy
+    command = join(" ", [
+      "../scripts/deprovision.sh",
+      self.ipv4_address,
+    ])
+  }
+
   labels = {
     "app_worker"  = "true"
     "environment" = "production"
   }
 
   depends_on = [
-    hcloud_server.leaders
+    hcloud_server.leaders,
+    hcloud_network_subnet.range_1
   ]
-}
-
-resource "hcloud_server_network" "app_workers" {
-  alias_ips  = []
-  count      = local.server_counts.app_workers
-  network_id = hcloud_network.main.id
-  server_id  = hcloud_server.app_workers[count.index].id
-}
-
-resource "null_resource" "app_workers" {
-  count = local.server_counts.app_workers > 1 ? 1 : 0
-
-  triggers = {
-    instance_ids = join(",", hcloud_server.app_workers.*.id)
-  }
-
-  depends_on = [
-    hcloud_server_network.app_workers
-  ]
-
-  provisioner "local-exec" {
-    command = join(" ", [
-      "../scripts/provision.sh",
-      "workers",
-      "${join(",", hcloud_server.app_workers[*].ipv4_address)}", # Public IPV4
-      "${join(",", hcloud_server_network.leaders[*].ip)}",       # Private IPV4: Retry join leaders
-    ])
-  }
 }

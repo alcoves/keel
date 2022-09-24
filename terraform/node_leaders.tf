@@ -28,6 +28,12 @@ resource "hcloud_server" "leaders" {
     ipv6_enabled = false
   }
 
+  network {
+    alias_ips  = []
+    network_id = hcloud_network.main.id
+    ip         = "10.0.1.${count.index + 1}"
+  }
+
   connection {
     type        = "ssh"
     user        = "root"
@@ -41,40 +47,18 @@ resource "hcloud_server" "leaders" {
   }
 
   provisioner "local-exec" {
-    when    = destroy
-    command = "echo 'Destroy-time provisioner'"
+    command = count.index == 0 ? "../scripts/provision-leader-master.sh ${self.ipv4_address}" : "../scripts/provision-leader.sh 10.0.1.1 ${self.ipv4_address}"
+  }
+
+  provisioner "local-exec" {
+    when = destroy
+    command = join(" ", [
+      "../scripts/deprovision.sh",
+      self.ipv4_address
+    ])
   }
 
   labels = {
     "environment" = "production"
-  }
-}
-
-resource "hcloud_server_network" "leaders" {
-  alias_ips  = []
-  count      = local.server_counts.leaders
-  network_id = hcloud_network.main.id
-  ip         = "10.0.1.${count.index + 1}"
-  server_id  = hcloud_server.leaders[count.index].id
-}
-
-resource "null_resource" "leaders" {
-  count = local.server_counts.leaders > 1 ? 1 : 0
-
-  triggers = {
-    instance_ids = join(",", hcloud_server.leaders.*.id)
-  }
-
-  depends_on = [
-    hcloud_server_network.leaders
-  ]
-
-  provisioner "local-exec" {
-    command = join(" ", [
-      "../scripts/provision.sh",
-      "leaders",
-      "${join(",", hcloud_server.leaders[*].ipv4_address)}", # Public IPV4
-      "${join(",", hcloud_server_network.leaders[*].ip)}",   # Private IPV4: Retry join leaders
-    ])
   }
 }
