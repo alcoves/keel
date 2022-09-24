@@ -1,4 +1,5 @@
 # keel
+
 The infrastructure that powers bken.io
 
 ## Initialize Terraform
@@ -52,3 +53,11 @@ docker stop pier
 docker rm pier
 docker run -d --name pier -p 80:3200 registry.digitalocean.com/bken/pier:latest
 ```
+
+### Bootstrapping a cluster
+
+- Start by creating leader and worker servers
+- Once provisioned, in order to use the nomad provider we have to gain access
+- Temporarily point the nomad provider to http address
+- Configure nomad jobs
+- Change Nomad provider to https with auth once fabio is configured

@@ -14,6 +14,7 @@ resource "hcloud_server" "app_workers" {
 
   firewall_ids = [
     hcloud_firewall.ssh.id,
+    hcloud_firewall.fabio.id,
   ]
 
   ssh_keys = [

@@ -32,3 +32,7 @@ provider "digitalocean" {
 provider "hcloud" {
   token = var.HETZNER_API_KEY
 }
+
+provider "nomad" {
+  address = "http://5.161.138.53:4646"
+}

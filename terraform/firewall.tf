@@ -140,13 +140,20 @@ resource "hcloud_firewall" "consul" {
   }
 }
 
-# resource "hcloud_firewall" "fabio" {
-#   name = "consul"
+resource "hcloud_firewall" "fabio" {
+  name = "fabio"
 
-#   rule {
-#     direction  = "in"
-#     protocol   = "tcp"
-#     port       = "9998"
-#     source_ips = ["0.0.0.0/0", "::/0"]
-#   }
-# }
+  rule {
+    direction  = "in"
+    protocol   = "tcp"
+    port       = "9998"
+    source_ips = ["${hcloud_load_balancer.main.ipv4}/32"]
+  }
+
+  rule {
+    direction  = "in"
+    protocol   = "tcp"
+    port       = "9999"
+    source_ips = ["${hcloud_load_balancer.main.ipv4}/32"]
+  }
+}
