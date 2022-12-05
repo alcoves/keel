@@ -61,3 +61,22 @@ docker run -d --name pier -p 80:3200 registry.digitalocean.com/bken/pier:latest
 - Temporarily point the nomad provider to http address
 - Configure nomad jobs
 - Change Nomad provider to https with auth once fabio is configured
+
+### Dockerfiles
+
+aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 594206825329.dkr.ecr.us-east-2.amazonaws.com
+
+```
+docker build --file docker/ffmpeg.Dockerfile --platform linux/amd64 -t ffmpeg .
+docker tag ffmpeg:latest 594206825329.dkr.ecr.us-east-2.amazonaws.com/ffmpeg:latest
+docker push 594206825329.dkr.ecr.us-east-2.amazonaws.com/ffmpeg:latest
+```
+
+Test locally
+
+```
+docker run -p 9000:8080 ffmpeg
+curl -XPOST \
+"http://localhost:9000/2015-03-31/functions/echo/invocations" \
+-d 'Hello from Container Lambda!'
+```
