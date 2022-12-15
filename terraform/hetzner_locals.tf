@@ -5,8 +5,8 @@ locals {
   heztner_subnet_3_range = "10.0.3.0/24"
 
   server_counts = {
-    leaders         = 2
-    app_workers     = 2
-    compute_workers = 2
+    leaders         = 1
+    app_workers     = 1
+    compute_workers = 0
   }
 }

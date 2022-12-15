@@ -23,7 +23,7 @@ resource "hcloud_server" "app_workers" {
   ]
 
   public_net {
-    ipv4_enabled = true
+    ipv4_enabled = false
     ipv6_enabled = false
   }
 
@@ -50,6 +50,15 @@ resource "hcloud_server" "app_workers" {
       "10.0.1.1", # Private IPV4: Retry join leader
       self.ipv4_address
     ])
+  }
+
+  provisioner "remote-exec" {
+    when = destroy
+    inline = [
+      "sudo systemctl stop consul",
+      "sudo systemctl stop nomad",
+      "sleep 20"
+    ]
   }
 
   provisioner "local-exec" {

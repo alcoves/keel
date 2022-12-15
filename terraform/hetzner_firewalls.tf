@@ -20,28 +20,6 @@ resource "hcloud_firewall" "ssh" {
   }
 }
 
-resource "hcloud_firewall" "nomad" {
-  name = "nomad"
-
-  rule {
-    direction  = "in"
-    protocol   = "tcp"
-    port       = "4646"
-    source_ips = ["0.0.0.0/0", "::/0"]
-  }
-}
-
-resource "hcloud_firewall" "consul" {
-  name = "consul"
-
-  rule {
-    direction  = "in"
-    protocol   = "tcp"
-    port       = "8500"
-    source_ips = ["0.0.0.0/0", "::/0"]
-  }
-}
-
 resource "hcloud_firewall" "fabio" {
   name = "fabio"
 

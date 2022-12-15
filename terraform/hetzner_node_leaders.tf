@@ -13,9 +13,7 @@ resource "hcloud_server" "leaders" {
   placement_group_id         = hcloud_placement_group.production.id
 
   firewall_ids = [
-    hcloud_firewall.ssh.id,
-    hcloud_firewall.nomad.id,
-    hcloud_firewall.consul.id
+    hcloud_firewall.ssh.id
   ]
 
   ssh_keys = [
