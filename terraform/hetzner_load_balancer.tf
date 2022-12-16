@@ -17,12 +17,16 @@ resource "hcloud_load_balancer_target" "app_workers" {
   label_selector   = "app_worker"
 }
 
-resource "hcloud_load_balancer_service" "http" {
+resource "hcloud_load_balancer_service" "https" {
   load_balancer_id = hcloud_load_balancer.main.id
-  protocol         = "http"
-  listen_port      = 80
+  protocol         = "https"
+  listen_port      = 443
   destination_port = 9999
   proxyprotocol    = false
+
+  http {
+    certificates = [data.hcloud_certificate.cloudflare_origin.id]
+  }
 
   health_check {
     retries  = 3

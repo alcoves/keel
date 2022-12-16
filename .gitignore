@@ -1,7 +1,7 @@
 *.env
 .env
-jobs
 *.tfvars
 .terraform
+jobs
 variables.json
 .DS_Store

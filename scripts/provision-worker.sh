@@ -17,4 +17,4 @@ hashi-up nomad install \
   --ssh-target-user root \
   --ssh-target-addr $PUBLIC_IPV4 \
   --ssh-target-key "~/.ssh/rusty" \
-  --config-file ../config/nomad_client.hcl
+  --config-file ../scripts/nomad_client.hcl

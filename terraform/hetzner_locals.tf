@@ -7,6 +7,6 @@ locals {
   server_counts = {
     leaders         = 1
     app_workers     = 1
-    compute_workers = 0
+    compute_workers = 1
   }
 }

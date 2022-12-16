@@ -1,6 +1,6 @@
-resource "hcloud_server" "app_workers" {
-  count                      = local.server_counts.app_workers
-  name                       = "app-worker-${count.index}"
+resource "hcloud_server" "compute_workers" {
+  count                      = local.server_counts.compute_workers
+  name                       = "compute-worker-${count.index}"
   keep_disk                  = true
   backups                    = false
   delete_protection          = false
@@ -8,13 +8,12 @@ resource "hcloud_server" "app_workers" {
   allow_deprecated_images    = false
   ignore_remote_firewall_ids = false
   location                   = "ash"
-  server_type                = "cpx21"
+  server_type                = "cpx31"
   image                      = "ubuntu-22.04"
   placement_group_id         = hcloud_placement_group.production.id
 
   firewall_ids = [
     hcloud_firewall.ssh.id,
-    hcloud_firewall.fabio.id,
   ]
 
   ssh_keys = [
@@ -70,7 +69,6 @@ resource "hcloud_server" "app_workers" {
   }
 
   labels = {
-    "app_worker"  = "true"
     "environment" = "production"
   }
 
