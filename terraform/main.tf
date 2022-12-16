@@ -1,36 +1,36 @@
 terraform {
   required_version = "1.3.0"
+
   backend "s3" {
     skip_credentials_validation = true
     skip_region_validation      = true
-    skip_metadata_api_check     = true
-    region                      = "us-east-1"
-    bucket                      = "bken-tfstate"
-    endpoint                    = "https://nyc3.digitaloceanspaces.com"
-    key                         = "keel/terraform/do-nyc3/terraform.tfstate"
+    region                      = "us-east-005"
+    bucket                      = "bken-tf-state"
+    key                         = "keel/terraform/terraform.tfstate"
+    endpoint                    = "https://s3.us-east-005.backblazeb2.com"
   }
 
   required_providers {
-    digitalocean = {
-      source  = "digitalocean/digitalocean"
-      version = "~> 2.0"
-    }
-
     hcloud = {
       source  = "hetznercloud/hcloud"
       version = "1.35.2"
     }
-  }
-}
 
-provider "digitalocean" {
-  token             = var.DIGITALOCEAN_TOKEN
-  spaces_access_id  = var.SPACES_ACCESS_KEY_ID
-  spaces_secret_key = var.SPACES_SECRET_ACCESS_KEY
+    b2 = {
+      source  = "Backblaze/b2"
+      version = "0.8.1"
+    }
+  }
 }
 
 provider "hcloud" {
   token = var.HETZNER_API_KEY
+}
+
+provider "b2" {
+  application_key_id = var.B2_ACCESS_KEY_ID
+  application_key    = var.B2_SECRET_ACCESS_KEY
+  endpoint           = "https://s3.us-east-005.backblazeb2.com"
 }
 
 provider "nomad" {
