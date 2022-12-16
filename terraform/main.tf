@@ -30,7 +30,6 @@ provider "hcloud" {
 provider "b2" {
   application_key_id = var.B2_ACCESS_KEY_ID
   application_key    = var.B2_SECRET_ACCESS_KEY
-  endpoint           = "https://s3.us-east-005.backblazeb2.com"
 }
 
 provider "nomad" {
