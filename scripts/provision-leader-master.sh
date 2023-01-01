@@ -16,8 +16,6 @@ hashi-up consul install \
 hashi-up nomad install \
   --server \
   --address 0.0.0.0 \
-  --bootstrap-expect 1 \
   --ssh-target-user root \
   --ssh-target-addr $PUBLIC_IPV4 \
-  --ssh-target-key "~/.ssh/rusty" \
-  --advertise "{{ GetInterfaceIP \"enp7s0\" }}"
+  --config-file ../scripts/nomad_server_bootstrap.hcl

@@ -19,15 +19,15 @@ resource "b2_bucket" "cdn_bken_io" {
       "x-bz-content-sha1"
     ]
     allowed_operations = [
-      "s3_put",
-      "s3_get",
       "s3_head",
-      "s3_post",
-      "s3_delete",
-      "b2_upload_file",
       "b2_upload_part",
       "b2_download_file_by_id",
+      "b2_upload_file",
+      "s3_put",
       "b2_download_file_by_name",
+      "s3_delete",
+      "s3_post",
+      "s3_get",
     ]
   }
 }
@@ -53,15 +53,15 @@ resource "b2_bucket" "dev_cdn_bken_io" {
       "x-bz-content-sha1"
     ]
     allowed_operations = [
-      "s3_put",
-      "s3_get",
       "s3_head",
-      "s3_post",
-      "s3_delete",
-      "b2_upload_file",
       "b2_upload_part",
       "b2_download_file_by_id",
+      "b2_upload_file",
+      "s3_put",
       "b2_download_file_by_name",
+      "s3_delete",
+      "s3_post",
+      "s3_get",
     ]
   }
 }

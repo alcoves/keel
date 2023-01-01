@@ -80,3 +80,12 @@ curl -XPOST \
 "http://localhost:9000/2015-03-31/functions/echo/invocations" \
 -d 'Hello from Container Lambda!'
 ```
+
+
+
+nomad job dispatch \
+  -meta "input=/mnt/houston/shack/media/gaming/tests/input.mkv" \
+  -meta "output=/mnt/houston/shack/media/gaming/tests/output.mkv" \
+  transcode
+
+nomad job dispatch transcode

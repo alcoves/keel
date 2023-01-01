@@ -9,8 +9,12 @@ advertise {
 }
 
 client {
-  enabled           = true
-  network_interface = "enp7s0"
+  enabled = false
+}
+
+server {
+  enabled          = true
+  bootstrap_expect = 2
 }
 
 plugin "docker" {
