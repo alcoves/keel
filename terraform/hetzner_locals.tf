@@ -8,6 +8,6 @@ locals {
     leaders               = 1
     app_workers           = 1
     compute_workers       = 1
-    compute_workers_cpx51 = 3
+    compute_workers_cpx51 = 0
   }
 }

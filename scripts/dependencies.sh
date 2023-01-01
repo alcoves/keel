@@ -4,7 +4,7 @@ set -eux
 apt update
 
 apt install -y \
-  zip gnupg unzip lsb-release curl \
+  wget curl zip gnupg unzip lsb-release curl \
   wget htop apt-transport-https \
   ca-certificates software-properties-common
 
