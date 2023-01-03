@@ -4,8 +4,8 @@ set -eux
 apt update
 
 apt install -y \
-  wget curl zip gnupg unzip lsb-release curl \
-  wget htop apt-transport-https \
+  awscli htop apt-transport-https \
+  wget curl zip gnupg unzip lsb-release \
   ca-certificates software-properties-common
 
 mkdir -p /etc/apt/keyrings
@@ -18,3 +18,9 @@ apt update
 apt install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
 
 service docker start
+
+FFMPEG_VERSION="ffmpeg-n5.1-latest-linux64-gpl-5.1"
+wget -q https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/${FFMPEG_VERSION}.tar.xz
+tar -xvf ${FFMPEG_VERSION}.tar.xz
+mv ${FFMPEG_VERSION}/bin/* /usr/bin/
+rm -rf ${FFMPEG_VERSION}*
